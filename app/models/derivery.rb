@@ -1,0 +1,2 @@
+class Derivery < ApplicationRecord
+end
