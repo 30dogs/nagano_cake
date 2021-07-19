@@ -11,23 +11,17 @@
       </table>
     </div>
     <div class="col-10">
-      <div class="top-info mb-3">
-        <div class="top-info-image">
-        </div>
-      </div>
-      <div class="new-products">
-        <h1>新着商品</h1>
-        <div class="new-products-items">
-          <% @products.last(4).each do |product| %>
-            <div class="new-products-item">
+      <div class="products-index">
+        <h1>商品一覧 (全<%= @products.count %>件)</h1>
+        <div class="products-index-items">
+          <% @products.each do |product| %>
+            <div class="products-index-item">
               <%= attach_image_tag products, :product_image, :fill, 100, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>
               <p><%= products.name %></p>
               <p><%= products.base_price %> (税抜)</p>
             </div>
           <% end %>
-          <p class="text-right">
-            <%= link_to "全ての商品を見る", products_path, class:"text-right" %>
-          </p>
+          <p class="text-center">kaminariページネーション実装</p>
         </div>
       </div>
     </div>
