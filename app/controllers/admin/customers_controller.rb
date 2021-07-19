@@ -3,6 +3,8 @@ class Admin::CustomersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
 
   def index
+    @customers = Customer.all
+    #@customers = Customer.page(params[:page]).reverse_order
   end
 
   def show
