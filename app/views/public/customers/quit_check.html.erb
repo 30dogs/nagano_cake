@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div>
+        <p>本当に退会しますか？</p>
+      </div>
+      <div>
+        <p>
+          退会すると、会員登録情報や<br>
+          これまでの購入履歴が閲覧できなくなります。<br>
+          退会する場合は、「退会する」をクリックしてください。
+        </p>
+      </div>
+      <div>
+        <%= link_to "退会しない", deliveries_path, class: "btn btn-primary" %>
+      </div>
+      <div>
+        <%= form_with model: current_customer, url: quit_customers_path, method: :patch, local: true do |f| %>
+          <%= f.hidden_field :is_deleted, value: false %>
+          <%= f.submit "注文を確定する", class: "btn btn-success" %>
+        <% end %>
+
+        <%= link_to "退会する", root_path, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
