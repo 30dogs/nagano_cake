@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <h2 class="bg-light">注文履歴一覧</h2>
+    </div>
+  </div>
+  <div>
+    <div class="col-10">
+      <table>
+        <thead class="bg-light">
+          <th>注文日</th>
+          <th>配送先</th>
+          <th>注文商品</th>
+          <th>支払金額</th>
+          <th>ステータス</th>
+          <th>注文詳細</th>
+        </thead>
+        <tbody>
+          <!-- 注文の一覧をeach文で記述　ここから -->
+          <%= @orders.each do |order| %>
+            <tr>
+              <td>
+                <!-- 注文日 -->
+                <%= order.created.id %>
+              </td>
+              <td>
+                <!-- 配送先郵便番号 -->
+                <p>〒<%= order.postcode %><br>
+                <!-- 配送先住所 -->
+                <%= order.address %><br>
+                <!-- 配送先氏名 -->
+                <%= order.name %></p>
+              </td>
+              <td>
+                <!-- 注文商品の一覧をeach文で記述　ここから -->
+                <%= order.products.each do |product| %>
+                  <p><%= product %><br></p>
+                <% end %>
+                <!-- 注文商品の一覧をeach文で記述　ここまで -->
+              </td>
+              <td>
+                <!-- 支払い金額 -->
+                <p><%= order.biliing_total %>円</p>
+              </td>
+              <td>
+                <!-- 支払いステータス -->
+                <p><%= order.status %></p>
+              </td>
+              <td>
+                <!-- 注文詳細ページのリンクがついたボタン -->
+                <%= link_to "表示する", order_path(order.id), class: "btn btn-primary" %>
+              </td>
+            </tr>
+          <% end %>
+          <!-- 注文の一覧をeach文で記述　ここまで -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

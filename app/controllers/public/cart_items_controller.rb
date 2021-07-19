@@ -10,6 +10,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def index
+    @cart_items = CartItem.where(customer_id: current_customer)
   end
 
   def update
