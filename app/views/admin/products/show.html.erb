@@ -1,0 +1,35 @@
+<!--6ページ-->
+
+<h3>商品詳細</h3>
+
+ <%= attachment_image_tag @product, :product_image, format: 'jpeg', fallback: 'no_image.jpg', size:'300x200'%>
+
+
+  <table class="table">
+    <tr>
+      <td>商品名</td>
+      <td><%= @product.name %></td>
+    </tr>
+    <tr>
+      <td>商品説明</td>
+      <td><%= @product.description %></td>
+    </tr>
+    <tr>
+      <td>ジャンル</td>
+      <td><%= @product.genre.name %></td>
+    </tr>
+    <tr>
+      <td>税込価格(税抜価格)</td>
+
+      <!--.to_iは整数にするメソッド.to_s(:delimited)は３桁で区切るメソッド&nbsp;は半角スペース-->
+      <td><%= ((@product.price*1.10).to_i).to_s(:delimited) %>&nbsp;(<%= (@product.price).to_s(:delimited) %>)円</td>
+
+    </tr>
+    <tr>
+      <td>販売ステータス</td>
+      <td><%= @product.sale_status %></td>
+    </tr>
+  </table>
+  <%= link_to '編集する', edit_admin_product_path %>
+</div>
+
