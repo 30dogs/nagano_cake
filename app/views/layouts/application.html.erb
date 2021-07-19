@@ -26,7 +26,7 @@
           <%= link_to "マイページ", mypage_path, class:"text-white p-2 mx-2 border rounded " %>
           <%= link_to "商品一覧", products_path, class:"text-white p-2 mx-2 border rounded" %>
           <%= link_to "カート", cart_items_path, class:"text-white p-2 mx-2 border rounded" %>
-          <%= link_to "ログアウト", destroy_customer_session_path, class:"text-white p-2 mx-2 border rounded" %>
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"text-white p-2 mx-2 border rounded" %>
         <% else %>
           <%= link_to "About", about_path, class:"text-white p-2 mx-2 border rounded" %>
           <%= link_to "商品一覧", products_path, class:"text-white p-2 mx-2 border rounded" %>
