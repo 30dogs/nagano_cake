@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <table class="table">
+        <tr>
+          <th>ジャンル検索</th>
+        </tr>
+        <tr>
+          <td>余裕があれば実装</td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-10">
+      <div class="top-info mb-3">
+        <div class="top-info-image">
+        </div>
+      </div>
+      <div class="new-products">
+        <h1>新着商品</h1>
+        <div class="new-products-items">
+          <% products.last(4).each do |product| %>
+            <div class="new-products-item">
+              <%= attach_image_tag products, :product_image, :fill, 100, 200, format: "jpeg" %><br>
+              <p><%= products.name %></p>
+              <p><%= products.base_price %> (税抜)</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
