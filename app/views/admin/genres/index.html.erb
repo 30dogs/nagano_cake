@@ -1,4 +1,51 @@
 <%# admin/ジャンル一覧・追加ページ %>
-
-<div class="row">
-  <h4 class="bg-light text-black px-4 offset-1">ジャンル一覧・追加ページ</h4>
+<div class="container">
+    <div class="row">
+        <h4 class="bg-light text-black px-4 offset-1">ジャンル一覧・追加ページ</h4>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <form>
+                <table class="form-group table table-borderless col-5">
+                    <tr>
+                    <th>ジャンル名</th>
+                    <td><input type="text" class="form-control"></td>
+                    <td class="col-4 offset-4"><%= link_to " 新規登録", edit_customers_path, class:"btn btn-success" %></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table ">
+            <thead class="thead-light">
+                <tr><th>ジャンル</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-2">aaaaaa</td>
+                    <td class="col-2"><%= link_to " 編集する", edit_customers_path, class:"btn btn-success" %></td>
+                </tr>
+                <tr>
+                    <td>aaaaaa</td>
+                </tr>
+                <tr>
+                    <td>aaaaaa</td>
+                </tr>
+                <tr>
+                    <td>aaaaaa</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <table>
+            <thead>
+                <tr>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+</div>
