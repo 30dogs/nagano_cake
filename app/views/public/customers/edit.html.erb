@@ -1,13 +1,60 @@
+
+<!--14ページ-->
+
 <div class="container">
  <div class="row">
+ <div class="col-xs-12">
 
-   <h2>会員情報編集</h2>
-<!-- form_with部分 -->
+    <h2>会員情報編集</h2>
 
-<%= form_with model:@customer, url:mypage_path, local:true, method: :patch do |f| %>
+    <%= form_with（model:@customer, url:mypage_path, local:true, method: :patch） do |f| %>
 
+      <% if @customer.errors.any? %>
+              <div class="pb-2 alert alert-danger">
+                <ul>
+                  <% @customer.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
 
+      <div class="col-xs-10">
+        <div class="form-group col-xs-12">
+          <%= f.label :"氏名", class: "col-sm-3 control-label" %>
+          <%= f.text_field :last_name, class: "col-sm-3 form-control" %>
+          <%= f.text_field :first_name, class: "col-sm-3 form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :"フリガナ", class: "col-sm-3 control-label" %>
+          <%= f.text_field :last_name_kana, class: "col-sm-3 form-control" %>
+          <%= f.text_field :first_name_kana, class: "col-sm-3 form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :"郵便番号", class: "col-sm-3 control-label" %>
+          <%= f.text_field :postcode, class: "col-sm-2 form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :"住所", class: "col-sm-3 control-label" %>
+          <%= f.text_field :address, class: "col-sm-9 form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :"電話番号(ハイフンなし)", class: "col-sm-3 control-label" %>
+          <%= f.text_field :phone_number,  class: "col-sm-2 form-control" %>
+        </div>
+        <div class="form-group col-xs-12">
+          <%= f.label :"メールアドレス", class: "col-sm-3 control-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-sm-6 form-control" %>
+        </div>
+      </div>
 
+      <div class="actions col-xs-9 col-xs-offset-3">
+        <%= f.submit "編集内容を保存", class: "btn btn-primary col-xs-6" %>
+        <%= link_to '退会する', quit_check_customers_path, class: "btn btn-danger"%>
+      </div>
+    <% end %>
+
+  </div>
 
  </div>
 </div>

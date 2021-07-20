@@ -12,6 +12,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def edit
+   
   end
 
   def new
