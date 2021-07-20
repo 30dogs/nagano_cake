@@ -16,6 +16,8 @@ class Admin::ProductsController < ApplicationController
   end
 
   def new
+    @genres = Genre.all
+    @product = Product.new
   end
 
   def update
