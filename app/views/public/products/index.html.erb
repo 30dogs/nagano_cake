@@ -1,3 +1,8 @@
+<!--くまさん宿題事項-->
+  <!--・「全xx件中xx件表示」みたいにしたい-->
+  <!--・pagenationの位置調整-->
+<!--くまさん宿題事項-->
+
 <div class="container">
   <div class="row">
     <div class="col-2">
@@ -11,18 +16,24 @@
       </table>
     </div>
     <div class="col-10">
-      <div class="products-index">
-        <h1>商品一覧 (全<%= @products.count %>件)</h1>
-        <div class="products-index-items">
-          <% @products.each do |product| %>
-            <div class="products-index-item">
-              <%= attach_image_tag products, :product_image, :fill, 100, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>
-              <p><%= products.name %></p>
-              <p><%= products.base_price %> (税抜)</p>
-            </div>
-          <% end %>
-          <p class="text-center">kaminariページネーション実装</p>
-        </div>
+      <h1>商品一覧 (全<%= @products.count %>件)</h1>
+      <div class="products-index-items row">
+        <% @products.each do |product| %>
+          <div class="products-index-item col-3">
+            <%= link_to product_path(product.id) do %>
+              <!--画像動作確認のため 20行目 コメントアウト / 21行目 でページの動作を確認-->
+              <!--<#%= attachment_image_tag @product, :products_image, :fill, 100, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>-->
+              <div class="products-index-item-image">
+                <%= image_tag "no_image_kuma.jpg", width: "100%", height: "100%" %>
+              </div>
+            <% end %>
+            <p>商品名: <%= product.name %></p>
+            <p>¥ <%= product.base_price %> (税抜)</p>
+          </div>
+        <% end %>
+      </div>
+      <div class="pagenation">
+        <%= paginate @products %>
       </div>
     </div>
   </div>

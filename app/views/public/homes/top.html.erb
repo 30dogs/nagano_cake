@@ -19,10 +19,12 @@
         <h1>新着商品</h1>
         <div class="new-products-items">
           <% @products.last(4).each do |product| %>
-            <div class="new-products-item">
-              <%= attach_image_tag products, :product_image, :fill, 100, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>
-              <p><%= products.name %></p>
-              <p><%= products.base_price %> (税抜)</p>
+            <div class="new-products-item col-3">
+              <!--うまく動かないので24行目コメントアウト / 画像は代わりに25行目で画像運用-->
+              <!--<#%= attachment_image_tag @products, :product_image, :fill, 100, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>-->
+              <%= image_tag "no_image_kuma.jpg", width: "100%", height: "100%" %>
+              <p><%= product.name %></p>
+              <p><%= product.base_price %> (税抜)</p>
             </div>
           <% end %>
           <p class="text-right">
