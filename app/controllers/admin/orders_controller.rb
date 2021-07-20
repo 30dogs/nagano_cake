@@ -3,6 +3,7 @@ class Admin::OrdersController < ApplicationController
   end
 
   def show
+    @customer = current_customer
   end
 
   def update
