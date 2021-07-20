@@ -1,0 +1,45 @@
+<!--16ページ-->
+
+
+<div class="container">
+  <div class="row">
+
+        <h4>配送先編集</h4>
+      </div>
+
+      <%= form_with model: @delivery, url: deliveries_path(@delivery.id), local: true do |f| %>
+
+
+            <% if @delivery.errors.any? %>
+                  <% @delivery.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="form-group row">
+              <p>郵便番号</p>
+              <%= f.text_field :postcode, class: "form-control col-lg-6" %>
+            </div>
+
+            <div class="form-group row">
+              <p>住所</p>
+              <%= f.text_field :address, class: "form-control col-lg-6" %>
+            </div>
+
+            <div class="form-group row">
+              <p>宛名</p>
+              <%= f.text_field :name, class: "form-control" %>
+              <div>
+                <%= f.submit "変更内容を保存", class:"btn btn-success" %>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
