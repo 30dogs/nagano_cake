@@ -1,44 +1,80 @@
-<h3><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h3>
-      <%= form_with model: @customer, url: admin_customer_path(@customer), local:true do |f| %>
-        <div class="form-group">
-          <h4>会員ID</h4>
-          <%= @customer.id %>
-        </div>
-        <div class="form-group">
-          <h4><%= f.label "氏名" %></h4>
-          <%= f.text_field :last_name, class: "form-control" %>
-          <%= f.text_field :first_name, class: "form-control"%>
-        </div>
-          </div>
-        <div class="form-group">
-          <h4><%= f.label "フリガナ" %></h4>
-          <%= f.text_field :last_name_kana, class: "form-control" %>
-          <%= f.text_field :first_name_kana, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <h4>郵便番号</h4>
-          <%= f.text_field :postcode, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <h4>住所</h4>
-          <%= f.text_field :address, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <h4>電話番号</h4>
-          <%= f.text_field :phone_number, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <h4>メールアドレス</h4>
-          <%= f.email_field :email, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= f.label "会員ステータス" %>
-          <%= f.radio_button :is_deleted, :"有効" %>
-          <%= f.label :is_deleted, "有効", value: :true %>
-          <%= f.radio_button :is_deleted, :"退会" %>
-          <%= f.label :is_deleted, "退会", value: :false %>
-        </div>
-        <div class="form-group">
-          <%= f.submit "変更を保存" %>
-        </div>
-    <% end %>
+<div class="container">
+ <div class="row">
+    <div class="col-md-11">
+      <h3 class="mt-2"><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h3>
+    </div>
+
+  </div>
+
+  <%= form_with model: @customer, url: admin_customer_path(@customer), local: true do |f| %>
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-borderless">
+        <tr>
+          <th>会員ID</th>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <th style="width:60px"><%= f.label :氏名 %></th>
+          <!--d-flexで直下がflexに。横並びになる！-->
+          <td class="d-flex">
+            <!--form-controlで枠が綺麗になる-->
+            <%= f.text_field :last_name, class:"form-control" %>
+            <%= f.text_field :first_name, class:"form-control" %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :フリガナ %></th>
+          <td class="d-flex">
+            <%= f.text_field :last_name_kana, class:"form-control" %>
+            <%= f.text_field :first_name_kana, class:"form-control" %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :郵便番号 %></th>
+          <td><%= f.text_field :postcode, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :住所 %></th>
+          <td><%= f.text_field :address, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :電話番号 %></th>
+          <td><%= f.text_field :phone_number, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :メールアドレス %></th>
+          <td><%= f.text_field :email , class:"form-control"%></td>
+        </tr>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-8">
+        <!--form-inlineで横並びにする　flex-nowrapで折り返しなし-->
+        <tr class="form-group form-inline flex-nowrap">
+          <th class="form-group mr-3">会員ステータス</th>
+          <td class="form-group">
+          　<%= f.radio_button :is_deleted, :true %>
+          　<%= f.label :is_deleted, "有効", value: :true %>
+          　<%= f.radio_button :is_deleted, :false %>
+          　<%= f.label :is_active, "退会", value: :false %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <%= f.submit "変更を保存", class: "btn btn-secondary" %>
+          <% end %>
+          </td>
+        </tr>
+
+    </table>
+  </div>
+</div>
+
+
+
+
+
+</div>

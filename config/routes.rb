@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     end
 
     #public/deliveriesコントローラのルーティング
-    resources :deliveries, only: [:index, :edit, :update, :destroy]
+    resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
 
     #public/ordersコントローラのルーティング
     resources :orders, only: [:index, :show, :new, :create] do
