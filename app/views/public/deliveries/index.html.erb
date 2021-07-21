@@ -3,43 +3,45 @@
 
       <div class="col-md-12">
           <h2>配送先登録/一覧</h2>
-          <% if @delivery.errors.any? %>
-            <div class="alert alert-danger">
-              <% @deliveries.errors.full_messages.each do |message| %>
-                <%= message %><br>
-              <% end %>
-            </div>
-          <% end %>
+          <%# if @delivery.errors.any? %>
+            <!--<div class="alert alert-danger">-->
+              <%# @deliveries.errors.full_messages.each do |message| %>
+                <%#= message %><br>
+              <%# end %>
+            <!--</div>-->
+          <%# end %>
            <%= form_with model: @delivery, url: deliveries_path, local: true do |f| %>
               <div class="col-md-10">
-                  <div class="form-group col-md-12">
+                  <div class="form-group form-inline col-md-12">
                       <%= f.label :"郵便番号(ハイフンなし)" ,class: "col-md-4" %>
-                      <%= f.text_field :postcode, placeholder:"0000000", class: "col-md-4" %>
+                      <%= f.text_field :postcode, placeholder:"0000000", class: "form-control" %>
                   </div>
 
-                  <div class="form-group col-md-12">
+                  <div class="form-group form-inline col-md-12">
                       <%= f.label :"住所" ,class: "col-md-4 control-label" %>
-                      <%= f.text_field :address, placeholder:"東京都渋⾕区代々⽊神園町0-0", class: "col-md-7" %>
+                      <%= f.text_field :address, placeholder:"東京都渋⾕区代々⽊神園町0-0", :size=> "50" ,class: "form-control" %>
                   </div>
 
-                  <div class="form-group col-md-12">
-                      <%= f.label :"宛名" ,class: "col-md-4 control-label" %>
-                      <%= f.text_field :name, placeholder:"令和道子", class: "col-md-3" %>
-                      <%= f.submit '新規登録' ,class: "col-md-2 pull-right btn-lg btn-success " %>
+                  <div class="form-group form-inline col-md-12">
+                      <%= f.label :"宛名" ,class: "col-md-4" %>
+                      <%= f.text_field :name, placeholder:"令和道子", class: "form-control" %>
+                      <%= f.submit '新規登録' ,class: "col-md-1 ml-3 btn-sm btn-success " %>
                   </div>
 
               </div>
           <% end %>
+      </div>
+  </div>
 
   <div class="row">
-    <div class="col-sm-10 mx-auto">
+    <div class="col-md-12 mx-auto">
       <table class="table table-bordered">
         <thead class="bg-light">
           <tr>
-            <th class="col-sm-2">郵便番号</th>
-            <th class="col-sm-5">住所</th>
+            <th class="col-md-2">郵便番号</th>
+            <th class="col-sm-4">住所</th>
             <th class="col-sm-3">宛名</th>
-            <th colspan="2"></th>
+            <th colspan="3"></th>
           </tr>
         </thead>
         <tbody>
@@ -51,10 +53,10 @@
               <td colspan="2">
                 <div class="row">
                   <div class="col-lg-6 text-center">
-                    <%= link_to "編集する", edit_delivery_path(delivery.id), class: "btn btn-success" %>
+                    <%= link_to "編集する", edit_delivery_path(delivery.id), class: "btn btn-success btn-sm" %>
                   </div>
                   <div class="col-lg-6 text-center">
-                    <%= link_to "削除する", delivery_path(delivery.id), method: :delete, class: "btn btn-danger" %>
+                    <%= link_to "削除する", delivery_path(delivery.id), method: :delete, class: "btn btn-danger btn-sm" %>
                   </div>
                 </div>
               </td>
@@ -67,5 +69,5 @@
 
 
 
-      </div>
+
   </div>

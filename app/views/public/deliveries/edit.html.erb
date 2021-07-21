@@ -7,7 +7,7 @@
         <h4>配送先編集</h4>
       </div>
 
-      <%= form_with model: @delivery, url: deliveries_path(@delivery.id), local: true do |f| %>
+      <%= form_with(model: @delivery, url: delivery_path, local: true ,method: :patch) do |f| %>
 
 
             <% if @delivery.errors.any? %>

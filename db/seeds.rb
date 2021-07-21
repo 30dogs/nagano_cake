@@ -47,7 +47,7 @@ end
     name: "product#{number + 1}",
     description: "description#{number + 1}",
     base_price: "#{number + 1}",
-    product_image_id: "app/assets/images/no_image_kuma.jpg",
+    product_image: "app/assets/images/no_image_kuma.jpg",
     sale_status: "true"
   )
 end
