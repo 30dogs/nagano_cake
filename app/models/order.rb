@@ -11,4 +11,5 @@ class Order < ApplicationRecord
   validates :billing_total, presence: true
   validates :payment_method, presence: true
   validates :status, presence: true
+
 end

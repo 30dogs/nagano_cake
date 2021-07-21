@@ -72,18 +72,19 @@ class Public::OrdersController < ApplicationController
     @order.pay_method = params[:pay_method]
     @order.postage = 800
 
-    #カート内の税抜きの合計金額を繰り返し処理で求める。
-    @cart_item_base_price_totall = 0
-    cart_items = current_customer.cart_items
-    cart_items.each do |cart_items|
-      @cart_item_base_price_totall += cart_item.product.base_price * cart_item.quantity
-    end
+    # #カート内の税抜きの合計金額を繰り返し処理で求める。
+    # @cart_item_base_price_totall = 0
+    # cart_items = current_customer.cart_items
+    # cart_items.each do |cart_items|
+    #   @cart_item_base_price_totall += cart_item.product.base_price * cart_item.quantity
+    # end
 
-    #カート内の税抜きの合計金額に消費税を加える。
-    @cart_item_totall = (@cart_item_base_price_totall * 1.08).floor
+    # #カート内の税抜きの合計金額に消費税を加える。
+    # @cart_item_totall = (@cart_item_base_price_totall * 1.08).floor
 
+    @cart_item_totall = current_customer.total
     #請求金額を求める。
-    #カート内の税込みの合計金額に送料を加える。
+    #カート内の合計金額に送料を加える。
     @order.biling_total = @cart_item_totall + @order.postage
 
     #cart_itemsテーブルの中のcustomer_idが現在ログインしている会員のidと同じ値のレコードを取得する。
