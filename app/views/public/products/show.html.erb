@@ -29,7 +29,7 @@
           <%= f.hidden_field :product_id, :value => @product.id %>
           <!--ここまでカート追加のproduct.id-->
           <%= f.label :quantity, "購入数" %>
-            <%= f.select :quantity, [1,2,3,4,5] %>
+            <%= f.select :quantity, [1,2,3,4,5], :prompt => "選択してください" %>
           <%= f.submit "カートに入れる", class:"btn btn-sm btn-info" %>
           <% end %>
           <!--ここまでカート追加関連-->

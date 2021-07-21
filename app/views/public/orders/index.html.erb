@@ -22,7 +22,7 @@
             <tr>
               <td>
                 <!-- 注文日 -->
-                <%= order.created.id %>
+                <%= order.created_at %>
               </td>
               <td>
                 <!-- 配送先郵便番号 -->
@@ -41,7 +41,7 @@
               </td>
               <td>
                 <!-- 支払い金額 -->
-                <p><%= order.biliing_total %>円</p>
+                <p><%= order.billing_total %>円</p>
               </td>
               <td>
                 <!-- 支払いステータス -->

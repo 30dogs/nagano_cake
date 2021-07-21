@@ -6,6 +6,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_items = OrderItem.where(order_id: @order.id)
   end
 
   def new
@@ -85,7 +87,8 @@ class Public::OrdersController < ApplicationController
     @cart_item_totall = current_customer.total
     #請求金額を求める。
     #カート内の合計金額に送料を加える。
-    @order.biling_total = @cart_item_totall + @order.postage
+    @order.billing_total = @cart_item_totall + @order.postage
+    # くまさんより - 89行名 "biling_total" → "billing_total" へ編集しました!!
 
     #cart_itemsテーブルの中のcustomer_idが現在ログインしている会員のidと同じ値のレコードを取得する。
     @cart_items = current_customer.cart_items
