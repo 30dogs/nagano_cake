@@ -8,11 +8,7 @@ Rails.application.routes.draw do
   passwords:     'admins/passwords',
   #admins/registrationsは必要？  registrations: 'admins/registrations'
   }
-  devise_for :customers, controllers: {
-  sessions:      'customers/sessions',
-  passwords:     'customers/passwords',
-  registrations: 'customers/registrations'
-  }
+
   ##########ここまで##########
 
   #管理者ページのルーティング
@@ -67,6 +63,12 @@ Rails.application.routes.draw do
         post 'confirm'#'/orders/confirm', to: 'orders#confirm', as:
       end
     end
+
+  devise_for :customers, controllers: {
+  sessions:      'public/customers/sessions',
+  # passwords:     'public/customers/passwords',
+  registrations: 'public/customers/registrations'
+  }
 
     #public/productsコントローラのルーティング
     resources :products, only: [:index, :show]
