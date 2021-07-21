@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NaganoCake</title>
+    <title>Nagano Cake Official Store</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,13 +13,13 @@
     <!--ここからヘッダー-->
     <div class="navbar mb-3 bg-dark">
       <div class="navbar navbar-brand">
-        <h1><%= link_to "長野ケーキ", root_path, class:"text-white" %></h1>
+        <h1><%= link_to "NAGANO CAKE", root_path, class:"navbar-logo" %></h1>
       </div>
       <div class="navbar">
         <% if admin_signed_in? %>
-          <%= link_to "商品一覧", admin_orders_path, class:"text-white p-2 mx-2 border rounded" %>
+          <%= link_to "商品一覧", admin_products_path, class:"text-white p-2 mx-2 border rounded" %>
           <%= link_to "会員一覧", admin_customers_path, class:"text-white p-2 mx-2 border rounded" %>
-          <%= link_to "注文履歴一覧", admin_products_path, class:"text-white p-2 mx-2 border rounded" %>
+          <%= link_to "注文履歴一覧", admin_orders_path, class:"text-white p-2 mx-2 border rounded" %>
           <%= link_to "ジャンル一覧", admin_genres_path, class:"text-white p-2 mx-2 border rounded" %>
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"text-white p-2 mx-2 border rounded" %>
         <% elsif customer_signed_in? %>

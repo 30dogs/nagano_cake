@@ -18,6 +18,11 @@ class Customer < ApplicationRecord
   validates :address, presence: true
   validates :phone_number,  presence: {message: '10桁もしくは11桁で入力してください。'}, format: { with: /\A\d{10,11}\z/ }
 
+
+  # statusに関するenum記述
+  enum is_deleted: { 有効: false, 無効: true }
+
+  # 会員フルネーム
   def full_name
     self.last_name + " " + self.first_name
   end
