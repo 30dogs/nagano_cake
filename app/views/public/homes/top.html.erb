@@ -12,19 +12,35 @@
     </div>
     <div class="col-10">
       <div class="top-info mb-3">
-        <div class="top-info-image">
+        <div class="top-info-image d-flex align-items-center">
+          <div class="col-8 mx-auto p-5 text-white top-info-text">
+            <p>ようこそ､ながのCAKEへ！</p>
+            <p>このサイトは、ケーキ販売のECサイトになります。</p>
+            <p>会員ではない方も商品を閲覧いただけますが、</p>
+            <p>ご購入の際は会員登録が必要となります。</p>
+          </div>
         </div>
       </div>
       <div class="new-products">
         <h1>新着商品</h1>
         <div class="new-products-items">
-          <% @products.last(4).each do |product| %>
-            <div class="new-products-item">
-             <br>
-              <p><%= product.name %></p>
-              <p><%= product.base_price %> (税抜)</p>
-            </div>
-          <% end %>
+          <div class="row">
+            <% @products.last(4).reverse_each do |product| %>
+              <div class="new-product-item col-3">
+                <div class="new-product-item-image">
+                  <!--うまく動かないので24行目コメントアウト / 画像は代わりに25行目で画像運用-->
+                  <!--<#%= attachment_image_tag @products, :product_image, :fill, 100, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>-->
+                  <%= link_to product_path(product.id) do %>
+                    <%= image_tag "no_image_kuma.jpg", width: "100%", height: "100%" %>
+                  <% end %>
+                </div>
+                <div class="new-product-item-info">
+                  <p><%= product.name %></p>
+                  <p>¥<%= product.base_price %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
           <p class="text-right">
             <%= link_to "全ての商品を見る", products_path, class:"text-right" %>
           </p>

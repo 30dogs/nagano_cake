@@ -1,6 +1,42 @@
 <%# admin/商品編集ページ %>
 
-<h4 class="bg-light text-black px-4 offset-1">商品編集ページ</h4>
-  <table>
-
-  </table>
+<<div class="container">
+  <div class="row">
+      <h4 class="bg-light text-black offset-1">商品編集</h4>
+      <table class="table table-borderless">
+        <%= form_with model:@customer, local:true do |f| %>
+          <tr class="field">
+            <th><%= f.label "商品画像" %></th>
+            <td><%= f.file_field :name %></td>
+          <tr class="field">
+            <th><%= f.label "商品名" %></th>
+            <td><%= f.text_field :name %></td>
+          </tr>
+          <tr class="field">
+            <th><%= f.label "商品説明" %></th>
+            <td><%= f.text_area :description, :size=>"23x5" %></td>
+          </tr>
+          <tr class="field">
+            <th><%= f.label "ジャンル" %></th>
+            <td><select class="form-control-sm col-3" ><option> :genre_id</option></select></td>
+          </tr>
+          <tr class="field">
+            <th><%= f.label "税抜価格" %></th>
+            <td><%= f.text_field :base_price %>円</td>
+          </tr>
+          <tr class="field">
+            <th><%= f.label "販売ステータス" %></th>
+            <td class="form-check">
+              <input class="form-check-input" type="radio" name="radio1" id="radio1a" checked>
+              <label class="form-check-label col-2" for="radio1a">販売中</label>
+              <input class="form-check-input" type="radio" name="radio1" id="radio1b">
+              <label class="form-check-label" for="radio1b">販売停止中</label>
+            </td>
+          </tr>
+          <tr>
+            <td><%= link_to "変更を保存", admin_product_path, class:"btn btn-success" %></td>
+          </tr>
+        <% end %>
+      </table>
+  </div>
+</div>
