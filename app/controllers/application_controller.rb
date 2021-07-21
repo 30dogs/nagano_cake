@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  #before_action :authenticate_user!, except: [:top, :about]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -17,9 +16,14 @@ class ApplicationController < ActionController::Base
   #     #新規登録した時のリンク先
   #   end
 
-  # くまさん_この記述があるとログアウトできないためコメントアウト
+  # 20~27行目:サインアウトがうまく機能しないため、コメントアウト
   # def after_sign_out_path_for(resource)
-  #   #ログアウトした時のリンク先
+  #   case resource
+  #   when Admin
+  #     products_path
+  #   when Customer
+  #     root_path
+  #   end
   # end
 
   private

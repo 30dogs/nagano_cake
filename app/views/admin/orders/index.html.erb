@@ -17,9 +17,9 @@
         <tbody>
           <% @orders.each do |order| %>
             <tr>
-              <td><%= order.created_at %></td>
+              <td><u><%= link_to order.created_at, admin_order_path(order.id), class:"text-dark" %></u></td>
               <td><%= order.name %></td>
-              <td>注文個数</td>
+              <td>■意味不明■</td>
               <td><%= order.status %></td>
             </tr>
           <% end %>
