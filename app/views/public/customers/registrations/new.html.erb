@@ -6,7 +6,7 @@
   </div>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "customers/shared/error_messages", resource: resource %>
+    <%= render "public/customers/shared/error_messages", resource: resource %>
 
     <div class="row">
       <div class="field form-group col-10">
@@ -86,7 +86,7 @@
   </div>
   <div class="row">
     <div class="col-4 offset-1">
-      <%= render "customers/shared/links" %>からログインしてください。</p>
+      <%= render "public/customers/shared/links" %>からログインしてください。</p>
     </div>
   </div>
 </div>
