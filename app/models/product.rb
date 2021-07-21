@@ -1,5 +1,4 @@
 class Product < ApplicationRecord
-  attachment :product_image
 
   belongs_to :genre
 
@@ -7,6 +6,8 @@ class Product < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :customers, through: :cart_items
   has_many :orders, through: :order_items
+
+  attachment :product_image
 
   validates :name, presence: true
   validates :description, presence: true
