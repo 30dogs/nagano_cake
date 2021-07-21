@@ -47,7 +47,7 @@ end
     name: "product#{number + 1}",
     description: "description#{number + 1}",
     base_price: "#{number + 1}",
-    product_image_id: "app/assets/images/no_image_kuma.jpg",
+    product_image: "app/assets/images/no_image_kuma.jpg",
     sale_status: "true"
   )
 end
@@ -68,3 +68,10 @@ end
 end
 # ここまでorder作成
 
+# #豆知識
+# 「rails db:reset」はデータベースをリセットするコマンド
+# 「rails db:seed」はseed.rbファイルをデータベースに適用させるコマンド
+
+# なので「rails db:reset」でデータベースをリセットした後は、「rails db:migrate」でデータベースを再構築したのち、「rails db:seed」でseed.rbファイルを適用させます。
+# しかし、cloud９の開発環境では「rails db:reset」を行うと、「rails db:reset」かつ「rails db:migrate」かつ「rails db:seed」の処理をまとめてやってくれることをターミナルの動作からメンターが推測してました。
+# メンターさんの開発環境では、seed.rbを適用させるとき、3つのコマンドを実行するそうです。ちなみに開発環境はビジュアルボックスと言っていました。
