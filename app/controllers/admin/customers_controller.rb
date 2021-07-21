@@ -1,6 +1,5 @@
 class Admin::CustomersController < ApplicationController
   before_action :authenticate_admin!
-  before_action :ensure_correct_adminr, only: [:edit, :update]
 
   def index
     #@customers = Customer.all

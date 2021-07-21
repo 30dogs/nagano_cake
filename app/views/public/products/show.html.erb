@@ -18,17 +18,18 @@
           <%= image_tag "no_image_kuma.jpg", width: "100%", height: "100%" %>
         </div>
         <div class="col-6 product-detail-text">
-          <!--ここからカート追加関連：リンク先等は仮入れ中-->
-          <%= form_with model:@cart_item, local:true do |f| %>
+          <!--ここからカート追加関連-->
+          <%= form_with model: @cart_item, url: cart_items_path, local:true do |f| %>
           <h3><%= @product.name %></h3>
           <p><%= @product.description %></p>
           <br>
           <br>
           <p><%= @product.base_price %>(税込) ※要税計算か？</p>
+          <!--ここからカート追加のproduct.id-->
+          <%= f.hidden_field :product_id, :value => @product.id %>
+          <!--ここまでカート追加のproduct.id-->
           <%= f.label :quantity, "購入数" %>
-            <!--ここから課題：在庫が5個未満でも選択できてしまう-->
-              <%= f.select :quantity, [1,2,3,4,5] %>
-            <!--ここまで課題：在庫が5個未満でも選択できてしまう-->
+            <%= f.select :quantity, [1,2,3,4,5] %>
           <%= f.submit "カートに入れる", class:"btn btn-sm btn-info" %>
           <% end %>
           <!--ここまでカート追加関連-->
