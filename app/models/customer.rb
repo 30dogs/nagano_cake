@@ -20,7 +20,8 @@ class Customer < ApplicationRecord
 
 
   # statusに関するenum記述
-  enum is_deleted: { 有効: false, 無効: true }
+  # ↓enumではなくてbooleanなのでここに書くとエラーになるのでコメントアウトしました
+  # enum is_deleted: { 有効: false, 無効: true }
 
   # 会員フルネーム
   def full_name
