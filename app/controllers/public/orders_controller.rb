@@ -6,6 +6,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_items = OrderItem.where(order_id: @order.id)
   end
 
   def new
@@ -36,6 +38,9 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    @order = Order.new(order_params)
+    @order.save
+    render :finish
   end
 
   def confirm
@@ -54,7 +59,7 @@ class Public::OrdersController < ApplicationController
       #@orderに現在ログインしている会員のaddress,postcode,nameを代入する。
       @order.address = current_customer.address
       @order.postcode = current_customer.postcode
-      @order.name = current_customer.name
+      @order.name = current_customer.full_name
     elsif params[:delivery] = 2
       #params[:sellect_delivery]はセレクトで選択した情報が保管されている、deliveriesテーブルのレコ―ドのidである。
       delivery = Delivery.find(params[:sellect_delivery])
@@ -69,26 +74,22 @@ class Public::OrdersController < ApplicationController
       @order.name = params[:name]
     end
     #@orderのpay_methodにパラメータで受け取った:pay_methodを代入する
-    @order.pay_method = params[:pay_method]
+    @order.payment_method = params[:payment_method]
     @order.postage = 800
-
-    # #カート内の税抜きの合計金額を繰り返し処理で求める。
-    # @cart_item_base_price_totall = 0
-    # cart_items = current_customer.cart_items
-    # cart_items.each do |cart_items|
-    #   @cart_item_base_price_totall += cart_item.product.base_price * cart_item.quantity
-    # end
-
-    # #カート内の税抜きの合計金額に消費税を加える。
-    # @cart_item_totall = (@cart_item_base_price_totall * 1.08).floor
 
     @cart_item_totall = current_customer.total
     #請求金額を求める。
     #カート内の合計金額に送料を加える。
-    @order.biling_total = @cart_item_totall + @order.postage
+    @order.billing_total = @cart_item_totall + @order.postage
+    # くまさんより - 89行名 "biling_total" → "billing_total" へ編集しました!!
 
     #cart_itemsテーブルの中のcustomer_idが現在ログインしている会員のidと同じ値のレコードを取得する。
     @cart_items = current_customer.cart_items
+  end
+
+  private
+  def order_params
+    params.require(:order).permit(:customer_id, :name, :postcode, :address, :postage, :biling_total, :payment_method)
   end
 
 end

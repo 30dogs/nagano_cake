@@ -49,7 +49,7 @@ class Customer < ApplicationRecord
     cart_items = self.cart_items
     #カート内の税抜きの合計金額を繰り返し処理で求める。
     base_price_total = 0
-    cart_items.each do |cart_items|
+    cart_items.each do |cart_item|
       base_price_total += cart_item.product.base_price * cart_item.quantity
     end
     #税抜きの合計金額に消費税を加える。
