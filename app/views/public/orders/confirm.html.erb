@@ -66,7 +66,7 @@
             </td>
             <td>
               <p>
-                <%= @cart_item_totall %>
+                <%= @cart_item_total %>
               </p>
             </td>
           </tr>
@@ -89,7 +89,7 @@
     <div class="col">
       <div>
         <p>支払い方法</p>
-        <p><%= @order.payment_method %></p>
+        <p><%= @order[:payment_method] %></p>
       </div>
       <div>
         <p>お届け先</p>
