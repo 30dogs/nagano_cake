@@ -20,12 +20,13 @@ class Admin::CustomersController < ApplicationController
     redirect_to admin_customer_path(@customer)
   end
 
-
-　private
-
-   def customer_params
-     	params.require(:customer).permit(:last_name, :first_name, :last_name_kana,
-     	:first_name_kana, :email, :postcode, :address, :phone_number, :is_deleted)
-   end
+  # くまさんより
+  # adminの "会員一覧" を押すとエラーが発生したため、
+  # 下記の "private" 箇所の記述を整理しました & エラーが出なくなりました。
+  private
+  def customer_params
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana,
+    :first_name_kana, :email, :postcode, :address, :phone_number, :is_deleted)
+  end
 
 end

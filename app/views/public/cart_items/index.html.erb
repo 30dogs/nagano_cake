@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class= "col-6 bg-light text-center">
+      <h2>ショッピングカート</h2>
+    </div>
+    <div class= "col-6 text-center">
+      <%= link_to "カートを空にする", destroy_all_path, method: :delete, class:"btn btn-sm btn-danger" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <table class="table">
+        <thead>
+          <th>
+            <p>商品名</p>
+          </th>
+          <th>
+            <p>単価(税込)</p>
+          </th>
+          <th>
+            <p>数量</p>
+          </th>
+          <th>
+            <p>小計</p>
+          </th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td>
+              <!-- 商品画像 -->
+                <!-- くまさん / ここの変更削除してOK -->
+                <%= image_tag "no_image_kuma.jpg", size: "40x40" %><br>
+                <!-- くまさん / ここの変更削除してOK -->
+              <!-- 商品名 -->
+              <p><%= cart_item.product.name %></p>
+            </td>
+            <td>
+              <!-- 商品の税抜き価格に消費税を加算させる -->
+              <%= cart_item.product.base_price * 1.08 %>
+            </td>
+            <td>
+              <!--数量の変更-->
+              <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch, local: true do |f| %>
+                <%= f.select :quantity, (1..1000) %>
+                <%= f.submit "変更", class:"btn btn-sm btn-success" %>
+              <% end %>
+            </td>
+            <td>小計</td>
+            <td>
+              <%= link_to "削除する", cart_item_path(cart_item), method: :delete,
+                  :id => cart_item.id, class:"btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <table class="table">
+        <th colspan="3">
+          <%= link_to "買い物を続ける", root_path, class:"btn btn-sm btn-success" %>
+        </th>
+        <th>合計金額</th>
+        <th>合計xxx円</th>
+      </table>
+    </div>
+  </div>
+    <div class="col-3 mx-auto">
+      <%= link_to "情報入力にすすむ", new_order_path, class:"btn btn-sm btn-info" %>
+    </div>
+  </div>
+</div>

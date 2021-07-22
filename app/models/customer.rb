@@ -19,9 +19,6 @@ class Customer < ApplicationRecord
   validates :phone_number,  presence: {message: '10桁もしくは11桁で入力してください。'}, format: { with: /\A\d{10,11}\z/ }
 
 
-  # statusに関するenum記述
-  enum is_deleted: { 有効: false, 無効: true }
-
   # 会員フルネーム
   def full_name
     self.last_name + " " + self.first_name
@@ -46,11 +43,11 @@ class Customer < ApplicationRecord
 
   # カート内商品合計金額を返すメソッド
   def total
-    cart_items = current_customer.cart_items
+    cart_items = self.cart_items
     #カート内の税抜きの合計金額を繰り返し処理で求める。
-    base_price_totall = 0
-    cart_items.each do |cart_items|
-      base_price_totall += cart_item.product.base_price * cart_item.quantity
+    base_price_total = 0
+    cart_items.each do |cart_item|
+      base_price_total += cart_item.product.base_price * cart_item.quantity
     end
     #税抜きの合計金額に消費税を加える。
     return  (base_price_total * 1.08).floor
