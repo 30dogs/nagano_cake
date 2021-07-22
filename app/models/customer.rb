@@ -20,7 +20,7 @@ class Customer < ApplicationRecord
 
 
   # statusに関するenum記述
-  enum is_deleted: { 有効: false, 無効: true }
+  # enum is_deleted: { 有効: false, 無効: true }
 
   # 会員フルネーム
   def full_name
@@ -55,6 +55,5 @@ class Customer < ApplicationRecord
     #税抜きの合計金額に消費税を加える。
     return  (base_price_total * 1.08).floor
   end
-
 
 end

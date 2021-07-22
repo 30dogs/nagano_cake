@@ -3,19 +3,21 @@
     <div class="row">
         <h4 class="bg-light text-black px-4 offset-1">ジャンル一覧・追加ページ</h4>
     </div>
+
     <div class="row">
         <div class="col-12">
-            <form>
-                <table class="form-group table table-borderless col-5">
+            <table class="form-group table table-borderless col-6">
+                <%= form_with model: @genre, url: admin_genres_path, local:true do |f| %>
                     <tr>
-                    <th>ジャンル名</th>
-                    <td><input type="text" class="form-control"></td>
-                    <td class="col-4 offset-4"><%= link_to " 新規登録", admin_genres_path, class:"btn btn-success" %></td>
+                        <th >ジャンル名</th>
+                        <td><%= f.text_field :name %></td>
+                        <td><%= f.submit '新規登録', class: "btn btn-success"%></td>
                     </tr>
-                </table>
-            </form>
+                <% end %>
+            </table>
         </div>
     </div>
+
     <div class="row">
         <div class="col-5">
             <table class="table ">
@@ -26,34 +28,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <% @genres.each do |genre| %>
                     <tr>
-                        <td class="col-4">aaaaaa</td>
-                        <td class="col-1"><%= link_to " 編集する", admin_genres_path, class:"btn btn-success" %></td>
+                        <td class="col-4"><%= genre.name %></td>
+                        <td class="col-2"><%= link_to " 編集する", edit_admin_genre_path(genre), class:"btn btn-success" %></td>
                     </tr>
-                    <tr>
-                        <td class="col-2">aaaaaa</td>
-                        <td class="col-2"><%= link_to " 編集する", admin_genres_path, class:"btn btn-success" %></td>
-                    </tr>
-                    <tr>
-                        <td class="col-2">aaaaaa</td>
-                        <td class="col-2"><%= link_to " 編集する", admin_genres_path, class:"btn btn-success" %></td>
-                    </tr>
-                    <tr>
-                        <td class="col-2">aaaaaa</td>
-                        <td class="col-2"><%= link_to " 編集する", admin_genres_path, class:"btn btn-success" %></td>
-                    </tr>
+                    <% end %>
                 </tbody>
             </table>
         </div>
     </div>
-        <table>
-            <thead>
-                <tr>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
 </div>
