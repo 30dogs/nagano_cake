@@ -35,7 +35,7 @@ end
     redirect_to deliveries_path
   end
 
-  private
+ private
 
   def delivery_params
     params.require(:delivery).permit(:postcode, :address, :name)
