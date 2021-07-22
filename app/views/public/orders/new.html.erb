@@ -11,9 +11,9 @@
           </div>
           <div>
             <!--「クレジットカード」を選択するボタンを作成する。-->
-            <%= f.radio_button :pay_method, 0 %>クレジットカード
+            <%= f.radio_button :payment_method, 0 %>クレジットカード
             <!--「銀行振込」を選択するボタンを作成する。-->
-            <%= f.radio_button :pay_method, 1 %>銀行振込
+            <%= f.radio_button :payment_method, 1 %>銀行振込
           </div>
           <!--支払い方法選択　ここまで-->
 
@@ -27,7 +27,7 @@
           </div>
           <div>
             〒<%= @customer.postcode%> <%= @customer.address %><br>
-            <%= @customer.last_name %><%= @customer.first_name %>
+            <%= @customer.full_name %>
           </div>
           <div>
             <!--「登録済住所から選択」を選択するボタンを作成する。-->
