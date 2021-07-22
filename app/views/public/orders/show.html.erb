@@ -33,7 +33,8 @@
       <table class="table table-bordered">
         <tr>
           <td>商品合計</td>
-          <td>ここどうやるんじゃい？(税抜?税込?)</td>
+          <!-- 参照元：https://mrradiology.hatenablog.jp/entry/2018/02/27/082330 -->
+          <td><%= @order.order_items.to_a.sum { |item| item.sub_total_price } %></td>
         </tr>
         <tr>
           <td>配送料</td>
@@ -65,7 +66,7 @@
             <td><%= order_item.product.name %></td>
             <td><%= order_item.product.base_price %></td>
             <td><%= order_item.quantity %></td>
-            <td><%= order_item.subtotal %></td>
+            <td><%= order_item.sub_total_price %></td>
           </tr>
         <% end %>
       </table>

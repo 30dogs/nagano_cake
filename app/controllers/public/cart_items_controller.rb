@@ -4,9 +4,15 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy_all
+    cart_items = CartItem.where(customer_id: current_customer.id)
+    cart_items.destroy
+    redirect_to root_path
   end
 
   def destroy
+    cart_item = CartItem.find(params[:id])
+    cart_item.delete
+    redirect_to cart_items_path
   end
 
   def index
@@ -19,12 +25,13 @@ class Public::CartItemsController < ApplicationController
   def create
     cart_item = CartItem.new(cart_item_params)
     cart_item.customer_id = current_customer.id
-    # product_idはどうやって拾うのか
-    p cart_item
     if cart_item.save
       redirect_to cart_items_path
     else
-      render :"products/show"
+      # 数量選択しなかったら、商品詳細ページにrenderで
+      @product = Product.find(cart_item.product_id)
+      @cart_item = CartItem.new
+      render :"public/products/show"
     end
   end
 
