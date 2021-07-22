@@ -17,10 +17,8 @@
       <div>
         <%= form_with model: current_customer, url: quit_customers_path, method: :patch, local: true do |f| %>
           <%= f.hidden_field :is_deleted, value: false %>
-          <%= f.submit "注文を確定する", class: "btn btn-success" %>
+          <%= f.submit "退会する", class: "btn btn-danger" %>
         <% end %>
-
-        <%= link_to "退会する", root_path, class: "btn btn-danger" %>
       </div>
     </div>
   </div>
