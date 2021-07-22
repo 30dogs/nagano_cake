@@ -16,15 +16,20 @@ class Public::CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to mypage_path
     else
-        render :edit
+      render :edit
     end
   end
 
   def quit
-    customer = Customer(current_customer.id)
+    customer = current_customer
     customer.is_deleted = false
-    customer.update
+    customer.save
+    reset_session
     redirect_to root_path
   end
 
+  private
+  def customer_params
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postcode, :address, :phone_number, :email)
+  end
 end
