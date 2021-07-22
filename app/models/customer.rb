@@ -34,23 +34,23 @@ class Customer < ApplicationRecord
   #カート内商品小計(税抜き価格)を返すメソッド
   def base_price_subtotal(product_id)
     product = Product.find(product_id)
-    cart_item = current_customer.cart_item.find_by(product_id: product_id)
+    cart_item = self.cart_items.find_by(product_id: product_id)
     base_price_total = product.base_price * cart_item.quantity
     return base_price_total
   end
 
   #カート内商品小計(税込み価格)を返すメソッド
   def subtotal(product_id)
-    return (self.base_price_total(product_id) * 1.08).floor
+    return (self.base_price_subtotal(product_id) * 1.08).floor
   end
 
   # カート内商品合計金額を返すメソッド
   def total
-    cart_items = current_customer.cart_items
+    cart_items = self.cart_items
     #カート内の税抜きの合計金額を繰り返し処理で求める。
-    base_price_totall = 0
-    cart_items.each do |cart_items|
-      base_price_totall += cart_item.product.base_price * cart_item.quantity
+    base_price_total = 0
+    cart_items.each do |cart_item|
+      base_price_total += cart_item.product.base_price * cart_item.quantity
     end
     #税抜きの合計金額に消費税を加える。
     return  (base_price_total * 1.08).floor
