@@ -13,10 +13,13 @@
   <div class="row">
     <div class="col-8">
 
+    <!--<エラーメッセージ表示>-->
         <% if @delivery.errors.any? %>
+         <div class="alert alert-danger">
           <% @delivery.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
+         </div>
 
         <% end %>
 

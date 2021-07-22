@@ -3,13 +3,13 @@
 
       <div class="col-md-12">
           <h2>配送先登録/一覧</h2>
-          <%# if @delivery.errors.any? %>
-            <!--<div class="alert alert-danger">-->
-              <%# @deliveries.errors.full_messages.each do |message| %>
-                <%#= message %><br>
-              <%# end %>
-            <!--</div>-->
-          <%# end %>
+          <% if @delivery.errors.any? %>
+            <div class="alert alert-danger">
+              <% @delivery.errors.full_messages.each do |message| %>
+                <%= message %><br>
+              <% end %>
+            </div>
+          <% end %>
            <%= form_with model: @delivery, url: deliveries_path, local: true do |f| %>
               <div class="col-md-10">
                   <div class="form-group form-inline col-md-12">
@@ -53,7 +53,7 @@
               <td colspan="2">
                 <div class="row">
                   <div class="col-lg-6 text-center">
-                    <%= link_to "編集する", edit_delivery_path(delivery.id), class: "btn btn-success btn-sm" %>
+                    <%= link_to "編集する", edit_delivery_path(delivery.id), class: "btn btn-info btn-sm" %>
                   </div>
                   <div class="col-lg-6 text-center">
                     <%= link_to "削除する", delivery_path(delivery.id), method: :delete, class: "btn btn-danger btn-sm" %>
