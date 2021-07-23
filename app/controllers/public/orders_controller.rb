@@ -1,4 +1,7 @@
 class Public::OrdersController < ApplicationController
+
+  before_action :authenticate_customer!
+
   # [目的]confirmアクションとfinishアクションに関して、遷移前のページが指定した条件のURLでない場合は、別のページに遷移させる
   # やらなかったからと言って問題は起こらないので、別に必要はない。
   # before_action :check_confirm, only: [:confirm]
