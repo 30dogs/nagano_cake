@@ -22,6 +22,12 @@ class Customer < ApplicationRecord
   # ↓enumではなくてbooleanなのでここに書くとエラーになるのでコメントアウトしました
   # enum is_deleted: { 有効: false, 無効: true }
 
+  # ログインする時に退会済み(is_deleted==true)のユーザーを弾くためのメソッドを作成します。
+  # super && (self.is_deleted == false)で、customerのis_deletedがfalseならtrueを返すようにしています。
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
+
   # 会員フルネーム
   def full_name
     self.last_name + " " + self.first_name
@@ -55,5 +61,6 @@ class Customer < ApplicationRecord
     #税抜きの合計金額に消費税を加える。
     return  (base_price_total * 1.08).floor
   end
-
 end
+
+#競合解消 happy!
