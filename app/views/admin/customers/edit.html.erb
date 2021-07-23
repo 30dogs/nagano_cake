@@ -56,10 +56,10 @@
         <tr class="form-group form-inline flex-nowrap">
           <th class="form-group mr-3">会員ステータス</th>
           <td class="form-group">
-          　<%= f.radio_button :is_deleted, :true %>
-          　<%= f.label :is_deleted, "有効", value: :true %>
-          　<%= f.radio_button :is_deleted, :false %>
-          　<%= f.label :is_active, "退会", value: :false %>
+            <%= f.radio_button :is_deleted, :true %>
+            <%= f.label :is_deleted, "有効", value: :true %>
+            <%= f.radio_button :is_deleted, :false %>
+            <%= f.label :is_active, "退会", value: :false %>
           </td>
         </tr>
         <tr>

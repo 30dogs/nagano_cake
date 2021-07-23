@@ -56,7 +56,10 @@
 
       <div class="actions col-md-9 col-xs-offset-3 mt-1">
         <%= f.submit "編集内容を保存", class: "btn btn-secondary col-xs-6" %>
-        <%= link_to '退会する', quit_check_customers_path, class: "btn btn-info"%>
+        <!--ユーザーがログインしていて且つログインユーザーであれば退会ボタンを表示するようにしています。-->
+        <% if customer_signed_in? && @customer.id == current_customer.id %>
+          <%= link_to '退会する', quit_check_customers_path, class: "btn btn-info"%>
+        <% end %>
       </div>
     <% end %>
 

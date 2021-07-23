@@ -59,8 +59,8 @@ Rails.application.routes.draw do
     #public/ordersコントローラのルーティング
     resources :orders, only: [:index, :show, :new, :create] do
       collection do
-        get 'finish'#'/orders/finish', to: 'orders#finish', as:
-        post 'confirm'#'/orders/confirm', to: 'orders#confirm', as:
+        get 'confirm'
+        get 'finish'
       end
     end
 
