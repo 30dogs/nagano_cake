@@ -63,4 +63,4 @@ class Customer < ApplicationRecord
   end
 end
 
-#競合解消
+#競合解消 happy!
