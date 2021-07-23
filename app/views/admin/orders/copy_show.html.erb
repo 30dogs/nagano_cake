@@ -6,11 +6,10 @@
   </div>
   <div class="row">
     <table class="table table-borderless">
-      <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
       <tmain>
         <tr>
-          <th><%= f.label"購入者" %></th>
-          <td><%= link_to @order.name, admin_customer_path(@order.id) %></td>
+          <th class="col-2">購入者</th>
+          <td><%= @order.name %></td>
         </tr>
         <tr>
           <th class="col-2">注文日</th>
@@ -39,7 +38,6 @@
           <td></td>
         </tr>
       </tmain>
-      <% end %>
     </table>
   </div>
 
