@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
       new_admin_session_path
     elsif resource_or_scope == :customer
       # customerのリンク先指定してね
-      new_user_session_path
+      new_customer_session_path
     end
   end
 
