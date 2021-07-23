@@ -63,4 +63,4 @@ class Customer < ApplicationRecord
   end
 end
 
-
+# テスト
