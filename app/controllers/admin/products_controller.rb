@@ -21,8 +21,26 @@ class Admin::ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to admin_product_path(@product.id)
+      flash[:success] = "商品を更新しました"
+    end
   end
 
   def create
   end
+  
+  private
+
+  def product_params
+    params.require(:product).permit(
+      :name, 
+      :description,
+      :product_image,
+      :genre_id,
+      :base_price,
+      :sale_status
+      )
+  end
 end
+

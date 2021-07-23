@@ -1,8 +1,14 @@
+<%# admin/商品編集ページ %>
+
 <div class="container">
   <div class="row">
     <h4 class="bg-light text-black offset-1">商品編集</h4>
     <table class="table table-borderless">
       <%= form_with model: @product, url: admin_product_path(@product.id), method: :patch, local: true do |f| %>
+        <tr class="field">
+          <th><%= f.label "商品画像" %></th>
+          <td><%= f.file_field :product_image %>選択されていません</td>
+        </tr>
         <tr class="field">
           <th><%= f.label "商品名" %></th>
           <td><%= f.text_field :name %></td>
@@ -13,7 +19,7 @@
         </tr>
         <tr class="field">
           <th><%= f.label "ジャンル" %></th>
-          <td><%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: @product.genre.id  %></td>
+          <td><%= f.collection_sellect :genre_id %></td>
         </tr>
         <tr class="field">
           <th><%= f.label "税抜価格" %></th>

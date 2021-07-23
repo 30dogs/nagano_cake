@@ -13,7 +13,8 @@
         </tr>
         <tr>
           <th class="col-2">注文日</th>
-          <td><%= @order.created_at %></td>
+          <td><%= @order.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
+
         </tr>
         <tr>
           <th class="col-2">配送先</th>
@@ -30,8 +31,8 @@
         <tr>
           <th class="col-2">注文ステータス</th>
           <td>
-          <%= form_with(model: @order, url: admin_order_path, method: :patch, local: true) do |f| %>
-            <%= f.select :status, [["入金待ち",1],3,4] %>
+          <%= form_with(model: @order, url: admin_order_path(@order.id), method: :patch, local: true) do |f| %>
+            <%= f.select :status,[["入金待ち",0],["入金確認中",1],["製作中",2],["発送準備中",3],["発送済み",4]] %>
             <%= f.submit "更新", class:"btn btn-sm btn-info" %>
           <% end %>
           </td>
@@ -60,10 +61,10 @@
             <td><%= order_item.quantity %></td>
             <td><%= order_item.sub_total_price %></td>
             <td>
-              <%= order_item.making_status %>
-              <%= link_to "更新", root_path, class:"btn btn-sm btn-info" %><br>
-              ※製作ステータスを選択<br>
-              ※ボタンリンク要修正
+              <%= form_with(model: order_item, url: admin_order_order_item_path(order_id: @order.id, id: order_item.id), method: :patch, local: true) do |f| %>
+              <%= f.select :making_status,[["着手不可",0],["製作待ち",1],["製作中",2],["製作完了",3]] %>
+              <%= f.submit "更新", class:"btn btn-sm btn-info" %>
+              <% end %>
             </td>
           </tr>
         <% end %>
