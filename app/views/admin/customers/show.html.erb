@@ -19,7 +19,11 @@
       <p><%= @customer.address %></p>
       <p><%= @customer.phone_number %></p>
       <p><%= @customer.email%></p>
-      <p><%= @customer.is_deleted %></p>
+      <% if @customer.is_deleted == false %>
+      <p class="text-success">有効</p>
+      <% else %>
+      <p>退会</p>
+      <% end %>
     </div>
     <div class="col-8 mx-auto">
       <%= link_to "編集する", edit_admin_customer_path, class:"btn btn-sm btn-info mx-3" %>

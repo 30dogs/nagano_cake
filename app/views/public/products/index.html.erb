@@ -16,7 +16,7 @@
       </table>
     </div>
     <div class="col-10">
-      <h1>商品一覧 (全<%= @products.count %>件)</h1>
+      <h1>商品一覧 (全<%= Product.all.count %>件)</h1>
       <div class="products-index-items row">
         <% @products.each do |product| %>
           <div class="products-index-item col-3">

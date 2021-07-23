@@ -1,4 +1,7 @@
 class Public::DeliveriesController < ApplicationController
+
+  before_action :authenticate_customer!
+
   def index
     @delivery = Delivery.new
     @deliveries = current_customer.deliveries
@@ -35,12 +38,9 @@ end
     redirect_to deliveries_path
   end
 
- private
-
+  private
   def delivery_params
     params.require(:delivery).permit(:postcode, :address, :name)
   end
-
-
 
 end
