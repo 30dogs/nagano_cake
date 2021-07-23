@@ -10,6 +10,11 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
+    @order = Order.find(params[:id])
+    if @order.update(product_params)
+      flash[:success] = "製作ステータスを更新しました"
+      redirect_to request.referer
+    end
   end
   
   private
