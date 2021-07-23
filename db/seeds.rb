@@ -29,7 +29,7 @@ Admin.create!(
     postcode: "0000000",
     address: "住所#{number + 1}",
     phone_number: "0900000000#{number + 1}",
-    is_deleted: "有効"
+    is_deleted: "false"
   )
 end
 # ここまでCustomerアカウント作成
@@ -60,7 +60,8 @@ end
     name: "test@test#{number + 1}",
     postcode: "0000000",
     address: "住所",
-    postage: "700",
+    # くまさん_要件定義に従い 700円 → 800円 へ変更
+    postage: "800",
     billing_total: "#{number + 1}",
     payment_method: "銀行振込",
     status: "入金待ち"

@@ -34,18 +34,15 @@
         <tr>
           <td>商品合計</td>
           <!-- 参照元：https://mrradiology.hatenablog.jp/entry/2018/02/27/082330 -->
-          <td><%= @order.order_items.to_a.sum { |item| item.sub_total_price } %></td>
+          <td><%= @order.order_items.to_a.sum { |item| item.sub_total_price } %> 円</td>
         </tr>
         <tr>
           <td>配送料</td>
-          <td><%= @order.postage %> 円(税抜?税込?)</td>
+          <td><%= @order.postage %> 円</td>
         </tr>
         <tr>
           <td>御請求額</td>
-          <td>
-            別行でbilling_total以外の方法でも請求額出したいなぁ<br>
-            billing_total = <%= @order.billing_total %> 円(税抜?税込?)
-          </td>
+          <td><%= @order.billing_total %> 円</td>
         </tr>
       </table>
     </div>
