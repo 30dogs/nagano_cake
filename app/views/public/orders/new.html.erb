@@ -3,17 +3,21 @@
     <div class="col">
       <div>
         <h2>注文情報入力</h2>
-        <%= form_with url: confirm_orders_path, local: true do |f| %>
+        <%= form_with url: confirm_orders_path, method: :get, local: true do |f| %>
 
           <!--支払い方法選択　ここから-->
           <div>
             <%= f.label "支払い方法" %>
           </div>
           <div>
-            <!--「クレジットカード」を選択するボタンを作成する。-->
-            <%= f.radio_button :payment_method, 0 %>クレジットカード
-            <!--「銀行振込」を選択するボタンを作成する。-->
-            <%= f.radio_button :payment_method, 1 %>銀行振込
+            <!--「クレジットカード」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :payment_method, 1, checked: @payment_method_1 %>
+            <!--ラジオボタンの「:payment_method, value: 1」と対応したラベルを作成する。-->
+            <%= f.label :payment_method, "クレジットカード", value: 1 %>
+            <!--「銀行振込」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :payment_method, 0, checked: @payment_method_0 %>
+            <!--ラジオボタンの「:payment_method, value: 0」と対応したラベルを作成する。-->
+            <%= f.label :payment_method, "銀行振込", value: 0 %>
           </div>
           <!--支払い方法選択　ここまで-->
 
@@ -22,38 +26,47 @@
             <%= f.label "お届け先" %>
           </div>
           <div>
-            <!--「ご自身の住所」を選択するボタンを作成する。-->
-            <%= f.radio_button :delivery, 1 %>ご自身の住所
+            <!--「ご自身の住所」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :delivery, 1, checked: @delivery %>
+            <!--ラジオボタンの「:delivery, value: 1」と対応したラベルを作成する。-->
+            <%= f.label :delivery, "ご自身の住所", value: 1 %>
           </div>
           <div>
             〒<%= @customer.postcode%> <%= @customer.address %><br>
             <%= @customer.full_name %>
           </div>
           <div>
-            <!--「登録済住所から選択」を選択するボタンを作成する。-->
-            <%= f.radio_button :delivery, 2 %>登録先住所から選択
+            <!--「登録済住所から選択」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :delivery, 2, checked: @delivery %>
+            <!--ラジオボタンの「:delivery, value: 2」と対応したラベルを作成する。-->
+            <%= f.label :delivery, "登録先住所から選択", value: 2 %>
           </div>
           <div>
             <!--登録済住所から選択するプルダウンを作成する。-->
             <%= f.select :sellect_delivery, @array_deliveries %>
           </div>
           <div>
-            <!--「新しいお届け先」を選択するボタンを作成する。-->
-            <%= f.radio_button :delivery, 3 %>新しいお届け先
+            <!--「新しいお届け先」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :delivery, 3, checked: @delivery %>
+            <!--ラジオボタンの「:delivery, value: 3」と対応したラベルを作成する。-->
+            <%= f.label :delivery, "新しいお届け先", value: 3 %>
           <div>
-            <!--新しいお届け先の郵便番号を入力するフォームを作成する。-->
-            <%= f.label "郵便番号(ハイフンなし)" %>
-            <%= f.text_field :postcode %>
+            <!--ラジオボタンの「:delivery, value: 1」と対応したラベルを作成する。-->
+            <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
+            <!--郵便番号の入力フォームを作成する。valueはデフォルト値。-->
+            <%= f.text_field :postcode, value: @postcode %>
           </div>
           <div>
             <!--新しいお届け先の住所を入力するフォームを作成する。-->
-            <%= f.label "住所" %>
-            <%= f.text_field :address %>
+            <%= f.label :address, "住所" %>
+            <!--住所の入力フォームを作成する。valueはデフォルト値。-->
+            <%= f.text_field :address, value: @address %>
           </div>
           <div>
             <!--新しいお届け先の宛名を入力するフォームを作成する。-->
-            <%= f.label "宛名" %>
-            <%= f.text_field :name %>
+            <%= f.label :name, "宛名" %>
+            <!--宛名の入力フォームを作成する。valueはデフォルト値。-->
+            <%= f.text_field :name, value: @name %>
           </div>
           <!--お届け先選択　ここまで-->
 

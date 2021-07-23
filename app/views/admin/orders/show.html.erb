@@ -1,5 +1,6 @@
 <%# admin/注文履歴詳細ページ %>
 
+
 <div class="container">
   <div class="row">
     <h4 class="bg-light text-black px-4 offset-1">注文履歴詳細</h4>
@@ -9,23 +10,32 @@
       <tmain>
         <tr>
           <th class="col-2">購入者</th>
-          <td>a</td>
+          <td><%= @order.name %></td>
         </tr>
         <tr>
           <th class="col-2">注文日</th>
-          <td>aaaaaaaa</td>
+          <td><%= @order.created_at %></td>
         </tr>
         <tr>
           <th class="col-2">配送先</th>
-          <td>aaaaaaaa</br>aaaaaaaa</td>
+          <td>
+            <%= @order.postcode %></br>
+            <%= @order.address %></br>
+            <%= @order.name %></br>
+          </td>
         </tr>
         <tr>
           <th class="col-2">支払方法</th>
-          <td>aaaaaaaa</td>
+          <td><%= @order.payment_method %></td>
         </tr>
         <tr>
           <th class="col-2">注文ステータス</th>
-          <td>aaaaaaaa</td>
+          <td>
+            <%= @order.status %>
+            <%= link_to "更新", root_path, class:"btn btn-sm btn-info" %><br>
+            ※注文ステータスを選択<br>
+            ※ボタンリンク要修正
+          </td>
           <td></td>
         </tr>
       </tmain>
@@ -44,27 +54,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>商品名</td>
-          <td>単価(税込)</td>
-          <td>数量</td>
-          <td>小計</td>
-          <td>製作ステータス</td>
-        </tr>
-        <tr>
-          <td>商品名</td>
-          <td>単価(税込)</td>
-          <td>数量</td>
-          <td>小計</td>
-          <td>製作ステータス</td>
-        </tr>
-        <tr>
-          <td>商品名</td>
-          <td>単価(税込)</td>
-          <td>数量</td>
-          <td>小計</td>
-          <td>製作ステータス</td>
-        </tr>
+        <% @order.order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.product.name %></td>
+            <td><%= order_item.purchase_price %></td>
+            <td><%= order_item.quantity %></td>
+            <td><%= order_item.sub_total_price %></td>
+            <td>
+              <%= order_item.making_status %>
+              <%= link_to "更新", root_path, class:"btn btn-sm btn-info" %><br>
+              ※製作ステータスを選択<br>
+              ※ボタンリンク要修正
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
 
@@ -72,15 +75,15 @@
       <tright>
         <tr>
           <td>商品合計</td>
-          <td>9999</td>
+          <td><%= @order.order_items.to_a.sum{ |item| item.sub_total_price } %></td>
         </tr>
         <tr>
           <td>送料</td>
-          <td>9999</td>
+          <td><%= @order.postage %></td>
         </tr>
         <tr>
           <td>請求金額合計</td>
-          <th>9999</th>
+          <th><%= @order.billing_total %></th>
         </tr>
       </tright>
     </table>

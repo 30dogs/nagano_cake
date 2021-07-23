@@ -11,9 +11,11 @@
 
   <body>
     <!--ここからヘッダー-->
-    <div class="navbar mb-3 bg-dark">
+    <div class="header navbar mb-3 py-4">
       <div class="navbar navbar-brand">
-        <h1><%= link_to "NAGANO CAKE", root_path, class:"navbar-logo" %></h1>
+        <%= link_to root_path do %>
+          <%= image_tag "public_top/logo.png" %>
+        <% end %>
       </div>
       <div class="navbar">
         <% if admin_signed_in? %>
@@ -38,7 +40,20 @@
     <!--ここまでヘッダー-->
     <%= yield %>
     <!--ここからフッター-->
-    <div class="bg-dark p-5 mt-5">
+    <div class="container bg-dark p-5 mt-5">
+      <div class="row">
+        <div class="col-6 text-white">
+          Nagano Cake<br>
+          〒xxx-xxxx<br>
+          長野県xxx市xxx0-00-0<br>
+          Tel：xx-xxxx-xxxx<br>
+          Fax：xx-xxxx-xxxx<br>
+          店舗営業時間：9:00 ~ 20:00<br>
+          休業日：毎週水曜日<br>
+        </div>
+      </div>
+    </div>
+    <div>
       <div class="text-white text-center">©30 dogs</div>
     </div>
     <!--ここまでフッター-->

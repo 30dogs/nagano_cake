@@ -29,18 +29,18 @@ Admin.create!(
     postcode: "0000000",
     address: "住所#{number + 1}",
     phone_number: "0900000000#{number + 1}",
-    is_deleted: "有効"
+    is_deleted: "false"
   )
 end
-# ここまでCustomerアカウント作成
+# # ここまでCustomerアカウント作成
 
-# ここからGenres作成
+# # ここからGenres作成
 5.times do |number|
   Genre.create(name: "#{number + 1}")
 end
-# ここまでGenres作成
+# # ここまでGenres作成
 
-# ここからproduct作成
+# # ここからproduct作成
 20.times do |number|
   Product.create!(
     genre_id: "1",
@@ -51,25 +51,26 @@ end
     sale_status: "True"
   )
 end
-# ここまでproduct作成
+# # ここまでproduct作成
 
-# ここからorder作成
+# # ここからorder作成
 50.times do |number|
   Order.create!(
     customer_id: "1",
     name: "test@test#{number + 1}",
     postcode: "0000000",
     address: "住所",
-    postage: "700",
+    # くまさん_要件定義に従い 700円 → 800円 へ変更
+    postage: "800",
     billing_total: "#{number + 1}",
     payment_method: "銀行振込",
     status: "入金待ち"
     )
 end
-# ここまでorder作成
+# # ここまでorder作成
 
-# 7/21 12:55 くまさん追記_order_itemを作成する"seed"をテスト用で記述
-# ここからorder_item作成
+# # 7/21 12:55 くまさん追記_order_itemを作成する"seed"をテスト用で記述
+# # ここからorder_item作成
 3.times do |number|
   OrderItem.create!(
     order_id: "1",
@@ -79,13 +80,13 @@ end
     making_status: "着手不可"
     )
 end
-# ここまでorder_item作成
+# # ここまでorder_item作成
 
 
-# #豆知識
-# 「rails db:reset」はデータベースをリセットするコマンド
-# 「rails db:seed」はseed.rbファイルをデータベースに適用させるコマンド
+# # #豆知識
+# # 「rails db:reset」はデータベースをリセットするコマンド
+# # 「rails db:seed」はseed.rbファイルをデータベースに適用させるコマンド
 
-# なので「rails db:reset」でデータベースをリセットした後は、「rails db:migrate」でデータベースを再構築したのち、「rails db:seed」でseed.rbファイルを適用させます。
-# しかし、cloud９の開発環境では「rails db:reset」を行うと、「rails db:reset」かつ「rails db:migrate」かつ「rails db:seed」の処理をまとめてやってくれることをターミナルの動作からメンターが推測してました。
-# メンターさんの開発環境では、seed.rbを適用させるとき、3つのコマンドを実行するそうです。ちなみに開発環境はビジュアルボックスと言っていました。
+# # なので「rails db:reset」でデータベースをリセットした後は、「rails db:migrate」でデータベースを再構築したのち、「rails db:seed」でseed.rbファイルを適用させます。
+# # しかし、cloud９の開発環境では「rails db:reset」を行うと、「rails db:reset」かつ「rails db:migrate」かつ「rails db:seed」の処理をまとめてやってくれることをターミナルの動作からメンターが推測してました。
+# # メンターさんの開発環境では、seed.rbを適用させるとき、3つのコマンドを実行するそうです。ちなみに開発環境はビジュアルボックスと言っていました。
