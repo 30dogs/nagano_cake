@@ -1,6 +1,6 @@
 <%# admin/商品編集ページ %>
 
-<<div class="container">
+<div class="container">
   <div class="row">
     <h4 class="bg-light text-black offset-1">商品編集</h4>
     <table class="table table-borderless">
@@ -27,7 +27,10 @@
         </tr>
         <tr class="field">
           <th><%= f.label "販売ステータス" %></th>
-          <td><%= f.radio_button :sale_status, :true %>販売中<%= f.radio_button :sale_status, :false %>販売停止中</td>
+          <td>
+            <%= f.radio_button :sale_status, :true %>販売中
+            <%= f.radio_button :sale_status, :false %>販売停止中
+          </td>
         </tr>
         <tr>
           <td><%= f.submit "変更を保存", class: "btn btn-info" %></td>

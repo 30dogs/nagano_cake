@@ -6,10 +6,9 @@
   </div>
   <div class="row">
     <table class="table table-borderless">
-      <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
       <tmain>
         <tr>
-          <th><%= f.label"購入者" %></th>
+          <th class="col-2">購入者</th>
           <td><%= link_to @order.name, admin_customer_path(@order.id) %></td>
         </tr>
         <tr>
@@ -31,15 +30,15 @@
         <tr>
           <th class="col-2">注文ステータス</th>
           <td>
-            <%= @order.status %>
-            <%= link_to "更新", root_path, class:"btn btn-sm btn-info" %><br>
-            ※注文ステータスを選択<br>
-            ※ボタンリンク要修正
+          <%= form_with(model: @order, url: admin_order_path, method: :patch, local: true) do |f| %>
+            <%= f.collection_select :status, Order.all, :id  %>
+            <!--%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: @product.genre.id  %>-->
+            <%= f.submit "更新", class:"btn btn-sm btn-info" %>
+          <% end %>
           </td>
           <td></td>
         </tr>
       </tmain>
-      <% end %>
     </table>
   </div>
 
