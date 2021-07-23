@@ -20,7 +20,7 @@
             <% end %>
       <div class="row">
         <div class="col-md-8">
-           <table class="table table-borderless">
+           <table class="table table-borderless mt-1">
              <tr>
                <th style="width:30%"><%= f.label :氏名 %></th>
                <td class="d-flex">
@@ -55,11 +55,8 @@
         </div>
 
       <div class="actions col-md-9 col-xs-offset-3 mt-1">
-        <%= f.submit "編集内容を保存", class: "btn btn-secondary col-xs-6" %>
-        <!--ユーザーがログインしていて且つログインユーザーであれば退会ボタンを表示するようにしています。-->
-        <% if customer_signed_in? && @customer.id == current_customer.id %>
-          <%= link_to '退会する', quit_check_customers_path, class: "btn btn-info"%>
-        <% end %>
+        <%= f.submit "編集内容を保存", class: "btn btn-secondary btn-sm col-xs-6" %>
+        <%= link_to '退会する', quit_check_customers_path, class: "btn btn-info btn-sm"%>
       </div>
     <% end %>
 
