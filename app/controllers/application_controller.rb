@@ -13,29 +13,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # ==============
-
   # ログアウト先を指定
-  # def after_sign_out_path_for(resource)
-  #   case resource
-  #   when Admin
-  #     new_admin_session_path
-  #   when Customer
-  #     root_path
-  #   end
-  # end
-
   def after_sign_out_path_for(resource_or_scope)
     if resource_or_scope == :admin
       new_admin_session_path
     elsif resource_or_scope == :customer
-      # customerのリンク先指定してね
-      new_user_session_path
+      root_path
     end
   end
-
-
-  # ==============
 
   private
   def configure_permitted_parameters

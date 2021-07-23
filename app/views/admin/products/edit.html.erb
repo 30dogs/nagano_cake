@@ -7,7 +7,8 @@
       <%= form_with model: @product, url: admin_product_path(@product.id), method: :patch, local: true do |f| %>-->
         <tr class="field">
           <th><%= f.label "商品画像" %></th>
-          <td><%= f.file_field :product_image %>選択されていません</td>
+          <!--画像系は "file" じゃなくて "attachment_field" で処理していたので修正 -->
+          <td><%= f.attachment_field :product_image %>選択されていません</td>
         </tr>
         <tr class="field">
           <th><%= f.label "商品名" %></th>
@@ -19,7 +20,7 @@
         </tr>
         <tr class="field">
           <th><%= f.label "ジャンル" %></th>
-          <td><%= f.collection_sellect :genre_id %></td>
+          <td><%= f.collection_select :genre_id, @genres.all, :id, :name, prompt: @product.genre.id  %></td>
         </tr>
         <tr class="field">
           <th><%= f.label "税抜価格" %></th>
@@ -27,8 +28,8 @@
         </tr>
         <tr class="field">
           <th><%= f.label "販売ステータス" %></th>
-          <td><%= f.radio_button :sale_status %>販売中</td>
-          <td><%= f.radio_button :sale_status %>販売停止中</td>
+          <td><%= f.radio_button :sale_status, :true %>販売中</td>
+          <td><%= f.radio_button :sale_status, :false %>販売停止中</td>
         </tr>
         <tr>
           <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
