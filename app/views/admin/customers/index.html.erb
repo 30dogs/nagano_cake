@@ -5,7 +5,7 @@
         <p>会員一覧</p>
       </div>
       <div>
-        <table>
+        <table class="table">
           <thead>
             <th>
               <p>会員ID</p>
@@ -41,7 +41,7 @@
                   </p>
                 </td>
                 <td>
-                  <% if customer.is_deleted %>
+                  <% if "#{customer.is_deleted}" %>
                     <p class="text-success">有効</p>
                   <% else %>
                     <p class="text-light">退会</p>

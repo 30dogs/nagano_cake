@@ -5,10 +5,8 @@ class Public::CartItemsController < ApplicationController
 
   def destroy_all
     cart_items = CartItem.where(customer_id: current_customer.id)
-    cart_items.each do |cart_item|
-      cart_item.destroy
-    end
-    redirect_to cart_items_path
+    cart_items.destroy
+    redirect_to root_path
   end
 
   def destroy
@@ -22,9 +20,6 @@ class Public::CartItemsController < ApplicationController
   end
 
   def update
-    @cart_item = CartItem.find(params[:id])
-    @cart_item.update(cart_item_params)
-    redirect_to cart_items_path
   end
 
   def create

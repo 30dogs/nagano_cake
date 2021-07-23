@@ -2,7 +2,10 @@ class Public::OrdersController < ApplicationController
   # [目的]confirmアクションとfinishアクションに関して、遷移前のページが指定した条件のURLでない場合は、別のページに遷移させる
   # やらなかったからと言って問題は起こらないので、別に必要はない。
   # before_action :check_confirm, only: [:confirm]
-  before_action :check_finish, only: [:finish]
+  # before_action :check_finish, only: [:finish]
+
+  # [目的]　カート内に商品がなくても注文できてしまうことを避けるために、カート内商品がない場合には、newアクションに遷移しないようにする。
+  before_action :check_cart_item, only: [:new]
 
   # confirmアクションが行われる前に以下のアクションを実行させる
   # def check_confirm
@@ -13,9 +16,16 @@ class Public::OrdersController < ApplicationController
   # end
 
   # finishアクションが行われる前に以下のアクションを実行させる
-  def check_finish
-    # 遷移前のページのURLに「/orders/confirm」を含まない場合は、「/cart_items」に遷移させる
-    unless request.referer&.include?("/orders/confirm")
+  # def check_finish
+  #   # 遷移前のページのURLに「/orders/confirm」を含まない場合は、「/」に遷移させる
+  #   unless request.referer&.include?("/orders/confirm")
+  #     redirect_to root_path
+  #   end
+  # end
+
+  # newアクションが行われる前に以下のアクションを実行させる。
+  def check_cart_item
+    unless current_customer.cart_items.exists?
       redirect_to root_path
     end
   end
@@ -105,13 +115,12 @@ class Public::OrdersController < ApplicationController
     #請求金額を求める。
     #カート内の合計金額に送料を加える。
     @order.billing_total = @cart_item_total + @order.postage
-    # くまさんより - 89行名 "biling_total" → "billing_total" へ編集しました!!
 
     #cart_itemsテーブルの中のcustomer_idが現在ログインしている会員のidと同じ値のレコードを取得する。
     @cart_items = current_customer.cart_items
 
     if @order.invalid?
-      # new.html.erbで必要な変数を宣言する　ここから
+      # new.html.erbで必要な変数を宣言する。　ここから
       #customersテーブルの、ログインしている会員のレコードを取り出す。
       @customer = current_customer
       #deliveriesテーブルの、ログインしている会員が登録した配送先のレコードを取り出す。
@@ -133,7 +142,7 @@ class Public::OrdersController < ApplicationController
         #配列@array_deliveriesに配列array_deliveryを要素として追加する。
         @array_deliveries.push(array_delivery)
       end
-      # 入力した値を再びフォームに表示させるための変数を宣言する。　ここから
+      # 入力した値を再びpublic/orders/new.html.erbのフォームに表示させるための変数を宣言する。　ここから
       @postcode = params[:postcode]
       @address = params[:address]
       @name = params[:name]
@@ -149,8 +158,8 @@ class Public::OrdersController < ApplicationController
       elsif params[:delivery] == "3"
         @delivery = true
       end
-      # 入力した値を再びフォームに表示させるための変数を宣言する。　ここから
-      # new.html.erbで必要な変数を宣言する　ここまで
+      # 入力した値を再びpublic/orders/new.html.erbのフォームに表示させるための変数を宣言する。　ここまで
+      # new.html.erbで必要な変数を宣言する。　ここまで
 
       render :new
     end
