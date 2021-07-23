@@ -82,15 +82,6 @@ end
 # ここまでorder_item作成
 
 
-6.times do |number|
-  CartItem.create!(
-    customer_id: "1",
-    product_id: "#{number + 1}",
-    quantity: "5",
-    )
-end
-
-
 # #豆知識
 # 「rails db:reset」はデータベースをリセットするコマンド
 # 「rails db:seed」はseed.rbファイルをデータベースに適用させるコマンド

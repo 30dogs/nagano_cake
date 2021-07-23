@@ -22,8 +22,7 @@ class Public::CustomersController < ApplicationController
 
   def quit
     customer = current_customer
-    customer.is_deleted = false
-    customer.save
+    customer.update(is_deleted: true)
     reset_session
     redirect_to root_path
   end
