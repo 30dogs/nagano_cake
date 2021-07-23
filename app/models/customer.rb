@@ -61,5 +61,6 @@ class Customer < ApplicationRecord
     #税抜きの合計金額に消費税を加える。
     return  (base_price_total * 1.08).floor
   end
-
 end
+
+
