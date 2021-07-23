@@ -13,7 +13,7 @@ class Product < ApplicationRecord
   validates :description, presence: true
   validates :base_price, presence: true
   validates :product_image, presence: true
-  validates :sale_status, presence: true
+  validates :sale_status, inclusion: { in: [true, false] }
 
   # 商品の税込み価格を返すメソッド
   def price
