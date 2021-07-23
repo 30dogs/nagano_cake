@@ -1,14 +1,8 @@
-<%# admin/商品編集ページ %>
-
-<<div class="container">
+<div class="container">
   <div class="row">
     <h4 class="bg-light text-black offset-1">商品編集</h4>
     <table class="table table-borderless">
-      <%= form_with model: @product, url: admin_product_path(@product.id), method: :patch, local: true do |f| %>-->
-        <tr class="field">
-          <th><%= f.label "商品画像" %></th>
-          <td><%= f.attachment_field :product_image %></td>
-        </tr>
+      <%= form_with model: @product, url: admin_product_path(@product.id), method: :patch, local: true do |f| %>
         <tr class="field">
           <th><%= f.label "商品名" %></th>
           <td><%= f.text_field :name %></td>
@@ -27,10 +21,13 @@
         </tr>
         <tr class="field">
           <th><%= f.label "販売ステータス" %></th>
-          <td><%= f.radio_button :sale_status, :true %>販売中<%= f.radio_button :sale_status, :false %>販売停止中</td>
+          <td>
+            <%= f.radio_button :sale_status, :true %>販売中
+            <%= f.radio_button :sale_status, :false %>販売停止中
+          </td>
         </tr>
         <tr>
-          <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
+          <td><%= f.submit "変更を保存", class: "btn btn-info" %></td>
         </tr>
       <% end %>
     </table>
