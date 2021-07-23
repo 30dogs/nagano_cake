@@ -23,8 +23,11 @@
   box-sizing: border-box;
 }
 
-.container {
-  width: 100%;
+// ここからヘッダー
+header {
+  background-image: image-url("header/header_image1.png");
+  background-position: center;
+  background-size: cover;
 }
 
 .navbar-logo {
@@ -36,12 +39,16 @@
 	text-shadow:
 		5px 5px #000000,
 }
+// ここまでヘッダー
 
-.header {
-  background-image: image-url("header/header_image1.png");
+// ここからフッター
+footer {
+  width: 100%;
+  background-image: image-url("header/header_image3.png");
   background-position: center;
   background-size: cover;
 }
+// ここまでフッター
 
 .top-info {
   width: 100%;
