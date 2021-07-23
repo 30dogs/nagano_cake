@@ -48,8 +48,10 @@ Rails.application.routes.draw do
     get '/customers/mypage', to: 'customers#show', as: 'mypage'
     resource :customers, only: [:edit, :update] do
       collection do
-        get 'quit_check'#'/customers/quit_check', to: 'customers#quit_check', as:
-        patch 'quit'#'/customers/quit', to: 'customers#quit', as:
+        # confirmのHTTPメソッドがPOSTだった場合、「customers/confirm」のURLを直打ちすると、HTTPメソッドがgetの「customers/:id」が呼び出される。
+        # HTTPメソッドをgetにすると、直打ちしたときでも「customers/confirm」が呼び出されるので、postからgetに変更した。
+        get 'quit_check'
+        patch 'quit'
       end
     end
 
