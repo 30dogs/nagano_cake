@@ -83,5 +83,3 @@ end
     )
 end
 # # ここまでorder_item作成
-
-

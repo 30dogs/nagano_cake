@@ -16,6 +16,12 @@ class Order < ApplicationRecord
   enum payment_method: { 銀行振込: 0, クレジットカード: 1 }
 
   # statusに関するenum記述
-  enum status: { 入金待ち: 0, 入金確認中: 1, 製作中: 2, 発送準備中: 3, 発送済み: 4 }
+    enum status: {
+    入金待ち:0,
+    入金確認中:1,
+    製作中:2,
+    発送準備中:3,
+    発送済み:4
+  }
 
 end
