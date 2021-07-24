@@ -84,7 +84,11 @@ class Public::OrdersController < ApplicationController
     cart_items = current_customer.cart_items
     cart_items.each do |cart_item|
       # OrderItemクラスのインスタンスを生成して、値を代入する。
-      order_item = OrderItem.new(order_id: order.id, product_id: cart_item.product.id, quantity: cart_item.quantity, purchase_price: cart_item.product.base_price)
+      order_item = OrderItem.new
+      order_item.order_id = order.id
+      order_item.product_id = cart_item.product.id
+      order_item.quantity = cart_item.quantity
+      order_item.purchase_price = cart_item.product.base_price
       # order_itemsテーブルにデータを保存する。
       order_item.save
     end
