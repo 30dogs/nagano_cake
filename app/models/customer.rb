@@ -62,5 +62,3 @@ class Customer < ApplicationRecord
     return  (base_price_total * 1.08).floor
   end
 end
-
-#競合解消 happy!
