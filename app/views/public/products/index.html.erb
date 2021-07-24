@@ -21,10 +21,8 @@
         <% @products.each do |product| %>
           <div class="products-index-item col-3">
             <%= link_to product_path(product.id) do %>
-              <!--画像動作確認のため 20行目 コメントアウト / 21行目 でページの動作を確認-->
-              <div class="products-index-item-image">
-              <!--<#%= attachment_image_tag @product, :products_image, :fill, 100, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>-->
-                <%= image_tag "no_image_kuma.jpg", width: "100%", height: "100%" %>
+              <div class="products-index-item-image mb-2">
+                <%= attachment_image_tag product, :product_image, :fill, 250, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>
               </div>
             <% end %>
             <p>商品名: <%= product.name %></p>
