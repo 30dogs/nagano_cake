@@ -1,0 +1,71 @@
+<!--ここのページを綺麗に！-->
+
+<div class="container">
+ <div class="row">
+  <div class="col-md-11">
+
+    <h2 class="mt-2">会員情報編集</h2>
+  </div>
+
+     <%= form_with model:@customer, url:customers_path, local:true, method: :patch do |f| %>
+
+      <% if @customer.errors.any? %>
+              <div class="pb-2 alert alert-danger">
+                <ul>
+                  <% @customer.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+      <div class="row">
+        <div class="col-md-8">
+           <table class="table table-borderless mt-1">
+             <tr>
+               <th style="width:30%"><%= f.label :氏名 %></th>
+               <td class="d-flex">
+                  <%= f.text_field :last_name, class:"form-control" %>
+                  <%= f.text_field :first_name, class:"form-control" %>
+               </td>
+             </tr>
+             <tr>
+             <th class="flex-nowrap"><%= f.label :フリガナ %></th>
+             <td class="d-flex">
+                  <%= f.text_field :last_name_kana, class: "form-control" %>
+                  <%= f.text_field :first_name_kana, class: "form-control" %>
+             </td>
+             </tr>
+            <tr>
+            <th><%= f.label :郵便番号 %></th>
+              <td><%= f.text_field :postcode, class:"form-control" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :住所 %></th>
+              <td><%= f.text_field :address, class:"form-control" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :電話番号 %></th>
+              <td><%= f.text_field :phone_number, class:"form-control" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :メールアドレス %></th>
+              <td><%= f.text_field :email , class:"form-control"%></td>
+            </tr>
+           </table>
+        </div>
+
+      <div class="actions col-md-9 col-xs-offset-3 mt-1">
+        <%= f.submit "編集内容を保存", class: "btn btn-secondary btn-sm col-xs-6" %>
+        <%= link_to '退会する', quit_check_customers_path, class: "btn btn-info btn-sm"%>
+      </div>
+    <% end %>
+
+    </div>
+
+
+
+ </div>
+</div>
+
+
+

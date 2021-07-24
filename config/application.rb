@@ -11,6 +11,10 @@ module NaganoCake
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    # [目的]created_at、updated_atを日本時間に設定する
+    # config/application.rbにタイムゾーンの設定を追加する。
+    config.time_zone = 'Tokyo'
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

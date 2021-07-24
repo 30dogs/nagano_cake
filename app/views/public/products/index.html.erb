@@ -1,0 +1,40 @@
+<!--くまさん宿題事項-->
+  <!--・「全xx件中xx件表示」みたいにしたい-->
+  <!--・pagenationの位置調整-->
+<!--くまさん宿題事項-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <table class="genres-sidebar table">
+        <tr>
+          <th>ジャンル検索</th>
+        </tr>
+        <tr>
+          <td>余裕があれば実装</td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-10">
+      <h1>商品一覧 (全<%= Product.all.count %>件)</h1>
+      <div class="products-index-items row">
+        <% @products.each do |product| %>
+          <div class="products-index-item col-3">
+            <%= link_to product_path(product.id) do %>
+              <!--画像動作確認のため 20行目 コメントアウト / 21行目 でページの動作を確認-->
+              <div class="products-index-item-image">
+              <!--<#%= attachment_image_tag @product, :products_image, :fill, 100, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>-->
+                <%= image_tag "no_image_kuma.jpg", width: "100%", height: "100%" %>
+              </div>
+            <% end %>
+            <p>商品名: <%= product.name %></p>
+            <p>¥ <%= product.base_price %> (税抜)</p>
+          </div>
+        <% end %>
+      </div>
+      <div class="pagenationc col-7 mx-auto">
+        <%= paginate @products %>
+      </div>
+    </div>
+  </div>
+</div>

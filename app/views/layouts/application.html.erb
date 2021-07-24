@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NaganoCake</title>
+    <title>Nagano Cake Official Store</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,63 @@
   </head>
 
   <body>
+    <header>
+      <!--ここからヘッダー-->
+      <div class="navbar mb-3 py-4">
+        <div class="navbar navbar-brand">
+          <%= link_to root_path do %>
+            <%= image_tag "public_top/logo.png" %>
+          <% end %>
+        </div>
+        <div class="navbar">
+          <% if admin_signed_in? %>
+            <%= link_to "商品一覧", admin_products_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "会員一覧", admin_customers_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "注文履歴一覧", admin_orders_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "ジャンル一覧", admin_genres_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"text-white p-2 mx-2 border rounded" %>
+          <% elsif customer_signed_in? %>
+            <%= link_to "マイページ", mypage_path, class:"text-white p-2 mx-2 border rounded " %>
+            <%= link_to "商品一覧", products_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "カート", cart_items_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"text-white p-2 mx-2 border rounded" %>
+          <% else %>
+            <%= link_to "About", about_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "商品一覧", products_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "新規登録", new_customer_registration_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "ログイン", new_customer_session_path, class:"text-white p-2 mx-2 border rounded" %>
+          <% end %>
+        </div>
+      </div>
+    </header>
+    <!--ここまでヘッダー-->
+
+    <!--ここからapplication.html.erb内に "notice & alert" の呼び出しを追加-->
+    <p class="notice ml-3 text-success"><%= notice %></p>
+    <p class="alert ml-3 text-danger"><strong><%= alert %></strong></p>
+    <!--ここまでapplication.html.erb内に "notice & alert" の呼び出しを追加-->
+
     <%= yield %>
+
+    <!--ここからフッター-->
+    <footer class="bg-dark p-5 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 text-white">
+            Nagano Cake<br>
+            〒xxx-xxxx<br>
+            長野県xxx市xxx0-00-0<br>
+            Tel：xx-xxxx-xxxx<br>
+            Fax：xx-xxxx-xxxx<br>
+            店舗営業時間：9:00 ~ 20:00<br>
+            休業日：毎週水曜日<br>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="text-white text-center">©30 dogs</div>
+      </div>
+    </footer>
+    <!--ここまでフッター-->
   </body>
 </html>

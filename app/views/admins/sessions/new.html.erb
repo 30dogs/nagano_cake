@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <h2>管理者ログイン</h2>
+          <div class="col-12 mt-3 mx-auto">
+            <!--"form_for" を "form_with" へ修正-->
+            <!--<#%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>-->
+            <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
+              <div class="form-group row">
+                <%= f.label :email, "メールアドレス", class:"col-2 col-form-label" %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control col-9", placeholder: "test@test" %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :password, "パスワード", class:"col-2 col-form-label" %>
+                <%= f.password_field :password, autocomplete: "current-password", class:"form-control col-9", placeholder: "test@test" %>
+              </div>
+              <!--ワイヤーフレームに記述ないためコメントアウト-->
+              <!--<#% if devise_mapping.rememberable? %>-->
+                <!--  <div class="field">-->
+                <!--    <#%= f.check_box :remember_me %>-->
+                <!--    <#%= f.label :remember_me %>-->
+                <!--  </div>-->
+              <!--<#% end %>-->
+              <div class="actions col-2 mt-3 mx-auto">
+                <%= f.submit "管理者ログイン", class:"btn btn-sm btn-info" %>
+              </div>
+            <% end %>
+            <!--ワイヤーフレームに記述ないためコメントアウト-->
+            <!--<#%= render "admins/shared/links" %>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

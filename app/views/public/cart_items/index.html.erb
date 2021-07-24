@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div class= "col">
+      <h2 class= "bg-light">ショッピングカート</h2>
+      <div>
+        <%= link_to "カートを空にする", destroy_all_path, method: :delete, class: "btn btn-danger" %>
+      </div>
+      <div>
+        <table class="table">
+          <thead>
+            <th>
+              <p>商品名</p>
+            </th>
+            <th>
+              <p>単価(税込)</p>
+            </th>
+            <th>
+              <p>数量</p>
+            </th>
+            <th>
+              <p>小計</p>
+            </th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% @cart_items.each do |cart_item| %>
+              <tr>
+                <td>
+                  <!-- 商品画像 -->
+                  <%= attachment_image_tag cart_item.product, :product_image, :fill, 60, 60, format: "jpeg", fallback: "noimage.jpg" %>
+                  <!-- 商品名 -->
+                  <%= cart_item.product.name %>
+                </td>
+                <td>
+                  <!-- 商品の税込み価格 -->
+                  <%= cart_item.product.price %>
+                </td>
+                <td>
+                  <!--数量の変更-->
+                  <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch, local: true do |f| %>
+                    <%= f.number_field :quantity, min: 0, max: 100 %>
+                    <!--くまさん_ここからcart_item個別削除のために必須 / ":id => cart_item.id"-->
+                    <%= f.submit "変更", class: "btn btn-success", :id => cart_item.id %>
+                    <!--くまさん_ここまでcart_item個別削除のために必須 / ":id => cart_item.id"-->
+                  <% end %>
+                </td>
+                <td>
+                  <%= cart_item.product.price * cart_item.quantity %>
+                </td>
+                <td>
+                  <!--くまさん_ここからcart_item個別削除のために必須 / ":id => cart_item.id"-->
+                   <%= link_to "削除する", cart_item_path(cart_item.id), :id => cart_item.id, method: :delete, class: "btn btn-danger" %>
+                  <!--くまさん_ここまでcart_item個別削除のために必須 / ":id => cart_item.id"-->
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
+      </div>
+      <div>
+        <table class="table">
+          <tr>
+            <th>
+              <P>合計金額</P>
+            </th>
+            <th>
+              <!--<#%= current_customer.total %>-->
+            </th>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <% if @cart_items.exists? %>
+          <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
