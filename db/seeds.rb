@@ -50,7 +50,7 @@ end
     description: "description#{number + 1}",
     base_price: "#{number + 1}",
     product_image: File.open("app/assets/images/no_image_kuma.jpg"),
-    #sale_status: "True"
+    sale_status: "True"
   )
 end
 # # ここまでproduct作成
