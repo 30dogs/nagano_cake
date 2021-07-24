@@ -1,6 +1,6 @@
 class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
     @orders = Order.page(params[:page]).reverse_order
   end
@@ -16,7 +16,7 @@ class Admin::OrdersController < ApplicationController
       redirect_to request.referer
     end
   end
-  
+
   private
 
   def order_params

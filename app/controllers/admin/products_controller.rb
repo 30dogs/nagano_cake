@@ -28,13 +28,16 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
+    product = Product.new(product_params)
+    product.save
+    redirect_to request.referer
   end
-  
+
   private
 
   def product_params
     params.require(:product).permit(
-      :name, 
+      :name,
       :description,
       :product_image,
       :genre_id,

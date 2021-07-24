@@ -21,7 +21,7 @@
                 <u><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M:%S'), admin_order_path(order.id), class:"text-dark" %></u>
               </td>
               <td><%= order.name %></td>
-              <td>■意味不明■</td>
+              <td><%= order.order_items.to_a.sum { |order_item| order_item.quantity } %></td>
               <td><%= order.status %></td>
             </tr>
           <% end %>
