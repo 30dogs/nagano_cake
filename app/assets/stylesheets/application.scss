@@ -23,6 +23,10 @@
   box-sizing: border-box;
 }
 
+p {
+  margin-bottom: 2px;
+}
+
 // ここからヘッダー
 header {
   background-image: image-url("header/header_image1.png");

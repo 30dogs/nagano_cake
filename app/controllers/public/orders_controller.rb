@@ -75,6 +75,22 @@ class Public::OrdersController < ApplicationController
     # 注文内容のレコードを保存する。
     @order.save
     # カート内商品のデータを削除をする。
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # くまさん追記~~~ここからOrder.item保存
+    @cart_items = CartItem.all
+    @cart_items.each do |cart_item|
+      @order_items = OrderItem.new
+      @order_items.order_id = @order.id
+      @order_items.product_id = cart_item.product_id
+      @order_items.quantity = cart_item.quantity
+      @order_items.purchase_price = cart_item.product.base_price
+      @order_items.making_status = 0
+      @order_items.save
+    end
+    # くまさん追記~~~ここまでOrder.item保存
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     current_customer.cart_items.destroy_all
     redirect_to finish_orders_path
   end
