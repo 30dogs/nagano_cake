@@ -1,4 +1,4 @@
-class Delivery < ApplicationRecord
+class Derivery < ApplicationRecord
   belongs_to :customer
 
   validates :name, presence: true
