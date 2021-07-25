@@ -23,7 +23,7 @@
             <%= link_to "商品一覧", admin_products_path, class:"text-white p-2 mx-2 border rounded" %>
             <%= link_to "会員一覧", admin_customers_path, class:"text-white p-2 mx-2 border rounded" %>
             <%= link_to "注文履歴一覧", admin_orders_path, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "ジャンル一覧", admin_genres_path, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "ジャンル一覧", admin_genres_path, method: :get, class:"text-white p-2 mx-2 border rounded" %>
             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"text-white p-2 mx-2 border rounded" %>
           <% elsif customer_signed_in? %>
             <%= link_to "マイページ", mypage_path, class:"text-white p-2 mx-2 border rounded " %>

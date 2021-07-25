@@ -30,6 +30,9 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
+    # ここから、くまさん追記
+    
+    # ここまで、くまさん追記
     cart_item = CartItem.new(cart_item_params)
     cart_item.customer_id = current_customer.id
     if cart_item.save
