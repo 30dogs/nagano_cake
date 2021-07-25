@@ -17,8 +17,8 @@
           <%= f.label "税抜き価格" %>
           <%= f.text_field :base_price %><p>円</p>
           <%= f.label "販売ステータス" %>
-          <%= f.radio_button :sale_status, 0 %>販売中
-          <%= f.radio_button :sale_status, 1 %>販売停止中
+          <%= f.radio_button :sale_status, true %>販売中
+          <%= f.radio_button :sale_status, false %>販売停止中
           <%= f.submit "新規登録", class: "btn btn-success" %>
         <% end %>
       </div>
