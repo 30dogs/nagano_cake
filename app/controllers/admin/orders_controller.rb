@@ -24,6 +24,12 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if @order.update(status: params[:order][:status].to_i)
+      # [目的]statusが1の場合、すべてのレコードのmaking_statusを1にする。
+      if Order.statuses[@order.status] == 1
+        @order.order_items.each do |order_item|
+          order_item.update(making_status: 1)
+        end
+      end
       flash[:success] = "注文ステータスを更新しました"
       redirect_to request.referer
     end
