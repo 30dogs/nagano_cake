@@ -7,7 +7,6 @@ class Admin::OrderItemsController < ApplicationController
     end
   end
 
-
    private
 
   def order_item_params

@@ -14,7 +14,6 @@
         <tr>
           <th class="col-2">注文日</th>
           <td><%= @order.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
-
         </tr>
         <tr>
           <th class="col-2">配送先</th>
@@ -32,7 +31,7 @@
           <th class="col-2">注文ステータス</th>
           <td>
           <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
-            <%= f.select :status, options_for_select(Order.statuses), {prompt: @order.status} %>
+            <%= f.select :status, options_for_select(Order.statuses), {selected: @order.status} %>
             <%= f.submit "更新", class:"btn btn-sm btn-info" %>
           <% end %>
           </td>
@@ -66,7 +65,6 @@
               <%= f.submit "更新", class:"btn btn-sm btn-info" %>
               <% end %>
             </td>
-
           </tr>
         <% end %>
       </tbody>
