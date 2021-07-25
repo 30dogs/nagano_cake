@@ -3,7 +3,8 @@
 <%= form_with model: @product, url: admin_product_path(@product.id), method: :patch, local: true do |f| %>
 <div class="container">
   <div class="row">
-    <h4 class="bg-light text-black offset-1">商品編集</h4>
+    <div class="col-12">
+    <h4 class="col-2 offset-1 bg-light text-black">商品編集</h4>
     <table class="table table-borderless">
         <tr class="field">
           <th><%= f.label "商品画像" %></th>
@@ -40,5 +41,7 @@
         </tr>
       <% end %>
     </table>
+    </div>
   </div>
 </div>
+<% end %>
