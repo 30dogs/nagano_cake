@@ -15,7 +15,6 @@
         <tr>
           <th class="col-2">注文日</th>
           <td><%= @order.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
-
         </tr>
         <tr>
           <th class="col-2">配送先</th>
@@ -71,7 +70,6 @@
               <%= f.submit "更新", class:"btn btn-sm btn-info" %>
               <% end %>
             </td>
-
           </tr>
           <%= order_item.making_status %>
           <%= OrderItem.making_statuses[order_item.making_status] %>
