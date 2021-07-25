@@ -9,7 +9,7 @@
             <table class="form-group table table-borderless col-6">
                 <%= form_with model: @genre, url: admin_genres_path, local:true do |f| %>
                     <tr>
-                        <th >ジャンル名</th>
+                        <th>ジャンル名</th>
                         <td><%= f.text_field :name %></td>
                         <td><%= f.submit '新規登録', class: "btn btn-success"%></td>
                     </tr>

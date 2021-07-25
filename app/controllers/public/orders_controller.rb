@@ -2,13 +2,14 @@ class Public::OrdersController < ApplicationController
 
   before_action :authenticate_customer!
 
-  # [目的]confirmアクションとfinishアクションに関して、遷移前のページが指定した条件のURLでない場合は、別のページに遷移させる
+  # [目的]confirmアクションとfinishアクションに関して、遷移前のページが指定した条件のURLでない場合は、別のページに遷移させる。
   # やらなかったからと言って問題は起こらないので、別に必要はない。
   # before_action :check_confirm, only: [:confirm]
   # before_action :check_finish, only: [:finish]
 
-  # [目的]　カート内に商品がなくても注文できてしまうことを避けるために、カート内商品がない場合には、newアクションに遷移しないようにする。
-  before_action :check_cart_item, only: [:new]
+  # [目的]　カート内に商品がなくても注文できてしまうことを避けるために、
+  # 　　　　カート内商品がない場合には、newアクション、createアクション、confirmアクションを実行できないようにしました。
+  before_action :check_cart_item, only: [:new, :create, :confirm]
 
   # confirmアクションが行われる前に以下のアクションを実行させる
   # def check_confirm
@@ -29,13 +30,16 @@ class Public::OrdersController < ApplicationController
   # newアクションが行われる前に以下のアクションを実行させる。
   def check_cart_item
     unless current_customer.cart_items.exists?
+      # falshメッセージを表示させる。
+      flash[:notice] = "カートに商品がないので注文できません"
+      # redirect_toで遷移先を指定する。
       redirect_to root_path
     end
   end
 
   def index
     #odersテーブルのレコードをすべて取得する
-    @orders = Order.all
+    @orders = current_customer.orders.page(params[:page]).reverse_order
   end
 
   def show
@@ -65,33 +69,32 @@ class Public::OrdersController < ApplicationController
       #配列@array_deliveriesに配列array_deliveryを要素として追加する
       @array_deliveries.push(array_delivery)
     end
+      @payment_method_0 = true
   end
 
   def finish
   end
 
   def create
-    @order = Order.new(order_params)
-    # 注文内容のレコードを保存する。
-    @order.save
-    # カート内商品のデータを削除をする。
-
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # くまさん追記~~~ここからOrder.item保存
-    @cart_items = CartItem.all
-    @cart_items.each do |cart_item|
-      @order_items = OrderItem.new
-      @order_items.order_id = @order.id
-      @order_items.product_id = cart_item.product_id
-      @order_items.quantity = cart_item.quantity
-      @order_items.purchase_price = cart_item.product.base_price
-      @order_items.making_status = 0
-      @order_items.save
+    # Orderクラスのインスタンスを生成する。
+    order = Order.new(order_params)
+    # ordersテーブルにデータを保存する。
+    order.save
+    # [目的] 注文商品テーブルに注文した商品を保存する。
+    cart_items = current_customer.cart_items
+    cart_items.each do |cart_item|
+      # OrderItemクラスのインスタンスを生成して、値を代入する。
+      order_item = OrderItem.new
+      order_item.order_id = order.id
+      order_item.product_id = cart_item.product.id
+      order_item.quantity = cart_item.quantity
+      order_item.purchase_price = cart_item.product.base_price
+      # order_itemsテーブルにデータを保存する。
+      order_item.save
     end
-    # くまさん追記~~~ここまでOrder.item保存
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+    # カート内商品のデータをすべて削除をする。
     current_customer.cart_items.destroy_all
+    # redirect_toで遷移先を指定する。
     redirect_to finish_orders_path
   end
 
@@ -113,16 +116,21 @@ class Public::OrdersController < ApplicationController
       @order.postcode = current_customer.postcode
       @order.name = current_customer.full_name
     elsif params[:delivery] == "2"
-      #params[:sellect_delivery]はセレクトで選択した情報が保管されている、deliveriesテーブルのレコ―ドのidである。
-      delivery = Delivery.find(params[:sellect_delivery].to_i)
-      #@orderにdeliveryのaddress,postcode,nameを代入する。
-      @order.address = delivery.address
-      @order.postcode = delivery.postcode
-      @order.name = delivery.name
+      # [目的] params[:sellect_delivery]が「空の配列」のとき、@orderに値を代入しない。
+      #「blank?」は「nil」に加えて「空白文字列」「空の配列」なども「true」が返却され、
+      #　それ以外の実際に値が設定されている場合には「false」が返却される。
+      unless params[:sellect_delivery].blank?
+        #params[:sellect_delivery]はセレクトで選択した情報が保管されている、deliveriesテーブルのレコ―ドのidである。
+        delivery = Delivery.find(params[:sellect_delivery].to_i)
+        #@orderにdeliveryのaddress,postcode,nameを代入する。
+        @order.address = delivery.address
+        @order.postcode = delivery.postcode
+        @order.name = delivery.name
+      end
     elsif params[:delivery] == "3"
       #@orderにパラメータで受け取った:address,:postcode,:nameを代入する。
       @order.address = params[:address]
-      @order.postcode = params[:pastcode]
+      @order.postcode = params[:postcode]
       @order.name = params[:name]
     end
     #@orderのpay_methodにパラメータで受け取った:pay_methodを代入する
@@ -138,6 +146,8 @@ class Public::OrdersController < ApplicationController
     #cart_itemsテーブルの中のcustomer_idが現在ログインしている会員のidと同じ値のレコードを取得する。
     @cart_items = current_customer.cart_items
 
+    # バリエーションのエラーがあるかどうかを調べる。
+    # エラーがあれば、trueが返され、new.html.erbに遷移させる。
     if @order.invalid?
       # new.html.erbで必要な変数を宣言する。　ここから
       #customersテーブルの、ログインしている会員のレコードを取り出す。
@@ -171,15 +181,15 @@ class Public::OrdersController < ApplicationController
         @payment_method_1 = true
       end
       if params[:delivery] == "1"
-        @delivery = true
+        @delivery_1 = true
       elsif params[:delivery] == "2"
-        @delivery = true
+        @delivery_2 = true
       elsif params[:delivery] == "3"
-        @delivery = true
+        @delivery_3 = true
       end
       # 入力した値を再びpublic/orders/new.html.erbのフォームに表示させるための変数を宣言する。　ここまで
       # new.html.erbで必要な変数を宣言する。　ここまで
-
+      # renderで遷移先を指定する。
       render :new
     end
   end
