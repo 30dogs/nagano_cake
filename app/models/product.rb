@@ -19,4 +19,11 @@ class Product < ApplicationRecord
   def price
     return (self.base_price * 1.08).floor
   end
+
+  # 商品の税込価格を計算し、3桁毎に","で区切ったものを返す
+  def tax_in_price
+    floor_price = (base_price * 1.08).floor
+    floor_price.to_s(:delimited, delimiter: ',')
+  end
+
 end
