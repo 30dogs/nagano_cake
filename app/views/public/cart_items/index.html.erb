@@ -39,18 +39,14 @@
                   <!--数量の変更-->
                   <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch, local: true do |f| %>
                     <%= f.number_field :quantity, min: 0, max: 100 %>
-                    <!--くまさん_ここからcart_item個別削除のために必須 / ":id => cart_item.id"-->
-                    <%= f.submit "変更", class: "btn btn-success", :id => cart_item.id %>
-                    <!--くまさん_ここまでcart_item個別削除のために必須 / ":id => cart_item.id"-->
+                    <%= f.submit "変更", class: "btn btn-success" %>
                   <% end %>
                 </td>
                 <td>
-                  <%= cart_item.product.price * cart_item.quantity %>
+                  <%= current_customer.subtotal(cart_item.product_id) %>円
                 </td>
                 <td>
-                  <!--くまさん_ここからcart_item個別削除のために必須 / ":id => cart_item.id"-->
-                   <%= link_to "削除する", cart_item_path(cart_item.id), :id => cart_item.id, method: :delete, class: "btn btn-danger" %>
-                  <!--くまさん_ここまでcart_item個別削除のために必須 / ":id => cart_item.id"-->
+                   <%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %>
                 </td>
               </tr>
             <% end %>
@@ -67,7 +63,7 @@
               <P>合計金額</P>
             </th>
             <th>
-              <!--<#%= current_customer.total %>-->
+              <%= current_customer.total %>円
             </th>
           </tr>
         </table>

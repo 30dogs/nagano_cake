@@ -27,7 +27,7 @@
           </div>
           <div>
             <!--「ご自身の住所」を選択するボタンを作成する。checkedはデフォルト値。-->
-            <%= f.radio_button :delivery, 1, checked: @delivery %>
+            <%= f.radio_button :delivery, 1, checked: @delivery_1 %>
             <!--ラジオボタンの「:delivery, value: 1」と対応したラベルを作成する。-->
             <%= f.label :delivery, "ご自身の住所", value: 1 %>
           </div>
@@ -37,7 +37,7 @@
           </div>
           <div>
             <!--「登録済住所から選択」を選択するボタンを作成する。checkedはデフォルト値。-->
-            <%= f.radio_button :delivery, 2, checked: @delivery %>
+            <%= f.radio_button :delivery, 2, checked: @delivery_2 %>
             <!--ラジオボタンの「:delivery, value: 2」と対応したラベルを作成する。-->
             <%= f.label :delivery, "登録先住所から選択", value: 2 %>
           </div>
@@ -47,7 +47,7 @@
           </div>
           <div>
             <!--「新しいお届け先」を選択するボタンを作成する。checkedはデフォルト値。-->
-            <%= f.radio_button :delivery, 3, checked: @delivery %>
+            <%= f.radio_button :delivery, 3, checked: @delivery_3 %>
             <!--ラジオボタンの「:delivery, value: 3」と対応したラベルを作成する。-->
             <%= f.label :delivery, "新しいお届け先", value: 3 %>
           <div>
