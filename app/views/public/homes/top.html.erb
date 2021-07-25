@@ -29,17 +29,17 @@
               <div class="new-product-item col-3">
                 <div class="new-product-item-image">
                   <%= link_to product_path(product.id) do %>
-                    <%= attachment_image_tag product, :product_image, format: "jpeg", fallback: "no_image_kuma.jpg", class:"col-12 p-0" %><br>
+                    <%= attachment_image_tag product, :product_image, :fill, 250, 200, format: "jpeg", fallback: "no_image_kuma.jpg" %><br>
                   <% end %>
                 </div>
-                <div class="new-product-item-info mt-2">
+                <div class="new-product-item-info">
                   <p><%= product.name %></p>
-                  <p class="mt-0">¥<%= product.base_price %></p>
+                  <p>¥<%= product.base_price %></p>
                 </div>
               </div>
             <% end %>
           </div>
-          <p class="text-right mt-2">
+          <p class="text-right">
             <%= link_to "全ての商品を見る", products_path, class:"text-right" %>
           </p>
         </div>

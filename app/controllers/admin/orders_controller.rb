@@ -7,6 +7,18 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+
+    # [目的] f.selectで用いる選択肢を作る。
+    #配列をつくるために、Arrayクラスのインスタンスを生成する
+    @array_order_status = Array.new
+    # 配列の要素を追加する
+    @array_order_status.push(["入金待ち", 0], ["入金確認中", 1], ["製作中",2], ["発送準備中", 3],["発送済み", 4])
+
+    # [目的] f.selectで用いる選択肢を作る。
+    #配列をつくるために、Arrayクラスのインスタンスを生成する
+    @array_order_item_making_status = Array.new
+    # 配列の要素を追加する
+    @array_order_item_making_status.push(["着手不可", 0], ["製作待ち", 1], ["製作中", 2], ["製作完了", 3])
   end
 
   def update

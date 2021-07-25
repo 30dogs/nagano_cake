@@ -30,18 +30,25 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    cart_item = CartItem.new(cart_item_params)
-    cart_item.customer_id = current_customer.id
-    if cart_item.save
-      flash[:notice] = "#{cart_item.product.name}をカートに追加しました"
-      redirect_to cart_items_path
-    else
       # 数量選択しなかったら、商品詳細ページにrenderで
+    if params[:cart_item][:product_id].blank?
       @product = Product.find(cart_item.product_id)
       @cart_item = CartItem.new
       flash[:notice] = "個数を選択してください"
       render :"public/products/show"
     end
+
+    if current_customer.cart_items.find_by(product_id: params[:cart_item][:product_id]).nil?
+      cart_item = CartItem.new(cart_item_params)
+      cart_item.customer_id = current_customer.id
+      cart_item.save
+    else
+      cart_item = current_customer.cart_items.find_by(product_id: params[:cart_item][:product_id])
+      quantity = cart_item.quantity + params[:cart_item][:quantity].to_i
+      cart_item.update(quantity: quantity)
+    end
+      flash[:notice] = "#{cart_item.product.name}をカートに追加しました"
+      redirect_to cart_items_path
   end
 
   private

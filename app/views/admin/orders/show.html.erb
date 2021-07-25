@@ -1,5 +1,6 @@
 <%# admin/注文履歴詳細ページ %>
-
+<%= @order.status %>
+<%= Order.statuses[@order.status] %>
 <div class="container">
   <div class="row">
     <h4 class="bg-light text-black px-4 offset-1">注文履歴詳細</h4>
@@ -32,7 +33,9 @@
           <th class="col-2">注文ステータス</th>
           <td>
           <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
-            <%= f.select :status, options_for_select(Order.statuses), {prompt: @order.status} %>
+            <!--selectedで指定された値の選択肢が最初から選択された状態にする-->
+            <!--Order.statuses[@order.status]でenumの元の値を取得する-->
+            <%= f.select :status, @array_order_status, {selected: Order.statuses[@order.status]} %>
             <%= f.submit "更新", class:"btn btn-sm btn-info" %>
           <% end %>
           </td>
@@ -62,12 +65,16 @@
             <td><%= order_item.sub_total_price %></td>
             <td>
               <%= form_with model: order_item, url: admin_order_order_item_path(order_id: @order.id, id: order_item.id), method: :patch, local: true do |f| %>
-              <%= f.select :making_status, options_for_select(OrderItem.making_statuses) %>
+              <!--selectedで指定された値の選択肢が最初から選択された状態にする-->
+              <!--OrderItem.making_statuses[order_item.making_status]でenumの元の値を取得する-->
+              <%= f.select :making_status, @array_order_item_making_status, {selected: OrderItem.making_statuses[order_item.making_status]} %>
               <%= f.submit "更新", class:"btn btn-sm btn-info" %>
               <% end %>
             </td>
 
           </tr>
+          <%= order_item.making_status %>
+          <%= OrderItem.making_statuses[order_item.making_status] %>
         <% end %>
       </tbody>
     </table>
