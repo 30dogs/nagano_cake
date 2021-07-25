@@ -1,6 +1,4 @@
 <%# admin/注文履歴詳細ページ %>
-<%= @order.status %>
-<%= Order.statuses[@order.status] %>
 <div class="container">
   <div class="row">
     <h4 class="bg-light text-black px-4 offset-1">注文履歴詳細</h4>
@@ -71,8 +69,6 @@
               <% end %>
             </td>
           </tr>
-          <%= order_item.making_status %>
-          <%= OrderItem.making_statuses[order_item.making_status] %>
         <% end %>
       </tbody>
     </table>
