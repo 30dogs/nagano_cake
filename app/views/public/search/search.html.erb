@@ -15,22 +15,27 @@
       </table>
     </div>
     <div class="col-10">
-      <h1 class="mb-4">商品一覧 (全<%= Product.all.count %>件)</h1>
+      <h1 class="mb-4">ジャンル (<%= @genre.name %>) 検索結果一覧</h1>
+      <% if @datas.empty? %>
+        <h4>
+          ごめんね(๑´›ωก̀๑)💦<br>
+          このジャンルの商品はまだないの
+        </h4>
+      <% end %>
       <div class="products-index-items row">
-        <% @products.each do |product| %>
+        <% @datas.each do |data| %>
           <div class="products-index-item col-3">
-            <%= link_to product_path(product.id) do %>
+            <%= link_to product_path(data.id) do %>
               <div class="products-index-item-image mb-2">
-                <%= attachment_image_tag product, :product_image, format: "jpeg", fallback: "no_image_kuma.jpg", class:"col-12 p-0" %>
+                <%= attachment_image_tag data, :product_image, format: "jpeg", fallback: "no_image_kuma.jpg", class:"col-12 p-0" %>
               </div>
             <% end %>
-            <p><strong><%= product.name %></strong></p>
-            <p>¥ <%= product.tax_in_price %></p>
+            <p><strong><%= data.name %></strong></p>
+            <p>¥ <%= data.tax_in_price %></p>
           </div>
         <% end %>
       </div>
       <div class="pagenationc col-7 mx-auto">
-        <%= paginate @products %>
       </div>
     </div>
   </div>
