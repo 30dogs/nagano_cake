@@ -17,3 +17,8 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// ここからくまさん追記_jquery実装のため追記
+//= require jquery
+//= require jquery_ujs
+// ここまでくまさん追記_jquery実装のため追記
