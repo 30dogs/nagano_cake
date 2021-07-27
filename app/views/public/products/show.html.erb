@@ -1,14 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-2">
-      <table class="genres-sidebar table">
-        <tr>
-          <th>ジャンル検索</th>
-        </tr>
-        <tr>
-          <td>余裕があれば実装</td>
-        </tr>
-      </table>
+      <%= render "public/products/genre_search", genres: @genres %>
     </div>
     <div class="col-10 product-detail">
       <div class="row">

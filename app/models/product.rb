@@ -26,4 +26,10 @@ class Product < ApplicationRecord
     floor_price.to_s(:delimited, delimiter: ',')
   end
 
+  # 商品の税抜価格を計算し、3桁毎に","で区切ったものを返す
+  def no_tax_price
+    floor_price = base_price.floor
+    floor_price.to_s(:delimited, delimiter: ',')
+  end
+
 end

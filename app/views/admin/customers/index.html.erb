@@ -1,10 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="mt-1 col-8">
-
         <h3>会員一覧</h3>
       </div>
-
     <div class="col-10 mx-auto">
       <table class="table">
         <thead class="thead-light">
@@ -15,7 +13,6 @@
             <th>ステータス</th>
           </tr>
           </thead>
-
           <tbody>
             <% @customers.each do |customer| %>
               <tr>
@@ -28,16 +25,14 @@
                   <% if customer.is_deleted == false %>
                    <p class="text-success">有効</p>
                   <% else %>
-                   <p>退会</p>
+                   <p class="text-danger">退会</p>
                   <% end %>
                 </td>
               </tr>
             <% end %>
           </tbody>
-
        </table>
      </div>
     </div>
   </div>
-
 <%= paginate @customers %>

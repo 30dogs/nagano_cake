@@ -12,30 +12,49 @@
 
   <body>
     <header>
+
       <!--ここからヘッダー-->
       <div class="navbar mb-3 py-4">
         <div class="navbar navbar-brand">
           <%= link_to root_path do %>
-            <%= image_tag "public_top/logo.png" %>
+            <div class="header-menu">
+              <img src="/assets/header/logo_off.png" alt="about">
+            </div>
           <% end %>
         </div>
         <div class="navbar">
           <% if admin_signed_in? %>
-            <%= link_to "商品一覧", admin_products_path, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "会員一覧", admin_customers_path, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "注文履歴一覧", admin_orders_path, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "ジャンル一覧", admin_genres_path, method: :get, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "商品一覧", admin_products_path, class:"nav-menu-text m-2" %>
+            <%= link_to "会員一覧", admin_customers_path, class:"nav-menu-text m-2" %>
+            <%= link_to "注文履歴一覧", admin_orders_path, class:"nav-menu-text" %>
+            <%= link_to "ジャンル一覧", admin_genres_path, method: :get, class:"nav-menu-text m-2" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-menu-text m-2" %>
           <% elsif customer_signed_in? %>
-            <%= link_to "マイページ", mypage_path, class:"text-white p-2 mx-2 border rounded " %>
-            <%= link_to "商品一覧", products_path, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "カート", cart_items_path, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"text-white p-2 mx-2 border rounded" %>
+            <%= link_to "マイページ", mypage_path, class:"nav-menu-text m-2" %>
+            <%= link_to "商品一覧", products_path, class:"nav-menu-text m-2" %>
+            <%= link_to "カート", cart_items_path, class:"nav-menu-text m-2" %>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"nav-menu-text m-2" %>
           <% else %>
-            <%= link_to "About", about_path, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "商品一覧", products_path, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "新規登録", new_customer_registration_path, class:"text-white p-2 mx-2 border rounded" %>
-            <%= link_to "ログイン", new_customer_session_path, class:"text-white p-2 mx-2 border rounded" %>
+            <div class="nav-menu m-2">
+              <%= link_to about_path do %>
+                <h6 class="nav-menu-text">about</h6>
+              <% end %>
+            </div>
+            <div class="nav-menu m-2">
+              <%= link_to products_path do %>
+                <h6 class="nav-menu-text">商品一覧</h6>
+              <% end %>
+            </div>
+            <div class="nav-menu m-2">
+              <%= link_to new_customer_registration_path do %>
+                <h6 class="nav-menu-text">新規登録</h6>
+              <% end %>
+            </div>
+            <div class="nav-menu m-2">
+              <%= link_to new_customer_session_path do %>
+                <h6 class="nav-menu-text">ログイン</h6>
+              <% end %> %>
+            </div>
           <% end %>
         </div>
       </div>
