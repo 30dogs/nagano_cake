@@ -6,7 +6,7 @@
      <h3>商品一覧</h3>
     </div>       <!--+ボタンは新規登録画面へ-->
     <div class="mb-3 col-3 text-right">
-      <button type="button" class="btn btn-light shadow-sm rounded-circle p-0" style="width:3rem;height:3rem;">
+      <button type="button" class="btn btn-outline-info shadow-sm rounded-circle p-0" style="width:3rem;height:3rem;">
         <%= link_to "＋", new_admin_product_path %>
       </button>
     </div>
@@ -35,7 +35,7 @@
               <td><%= product.base_price %></td>
               <td><%= product.genre.name %></td>
               <td><% if product.sale_status == true %>
-                  <p>販売中</p>
+                  <p class="text-success">販売中</p>
                 <% elsif product.sale_status == false %>
                   <p>販売停止中</p>
                 <% end %></td>

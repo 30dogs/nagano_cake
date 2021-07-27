@@ -1,45 +1,29 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <div>
-        <p>会員一覧</p>
+    <div class="mt-1 col-8">
+
+        <h3>会員一覧</h3>
       </div>
-      <div>
-        <table class="table">
-          <thead>
-            <th>
-              <p>会員ID</p>
-            </th>
-            <th>
-              <p>氏名</p>
-            </th>
-            <th>
-              <p>メールアドレス</p>
-            </th>
-            <th>
-              <p>ステータス</p>
-            </th>
+
+    <div class="col-10 mx-auto">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
           </thead>
+
           <tbody>
             <% @customers.each do |customer| %>
               <tr>
-                <td>
-                  <p>
-                    <%= customer.id %>
-                  </p>
-                </td>
-                <td>
-                  <p>
-                    <%= link_to admin_customer_path(customer.id) do %>
+                <td> <%= customer.id %></td>
+                <td> <%= link_to admin_customer_path(customer.id) do %>
                       <%= customer.last_name %><%= customer.first_name %>
-                    <% end %>
-                  </p>
-                </td>
-                <td>
-                  <p>
-                    <%= customer.email %>
-                  </p>
-                </td>
+                    <% end %> </td>
+                <td><%= customer.email %></td>
                 <td>
                   <% if customer.is_deleted == false %>
                    <p class="text-success">有効</p>
@@ -50,10 +34,10 @@
               </tr>
             <% end %>
           </tbody>
-        </table>
-      </div>
+
+       </table>
+     </div>
     </div>
   </div>
-</div>
 
 <%= paginate @customers %>
