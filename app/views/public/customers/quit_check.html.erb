@@ -1,25 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col"></div>
-    <div class="col-6">
-      <div>
-        <p>本当に退会しますか？</p>
-      </div>
-      <div>
-        <p>
-          退会すると、会員登録情報や<br>
-          これまでの購入履歴が閲覧できなくなります。<br>
-          退会する場合は、「退会する」をクリックしてください。
-        </p>
-      </div>
-      <div class="row">
-      <div class="col">
-        <%= link_to "退会しない", mypage_path, class: "btn btn-primary" %>
-      </div>
-      <div class="col">
-        <%= link_to "退会する", quit_customers_path, method: :patch, class: "btn btn-danger", data: { confirm: '本当に退会しますか？' } %>
+    <div class="col">
+      <p class="text-justify text-center">
+        本当に退会しますか？<br>退会すると、会員登録情報やこれまでの購入履歴が閲覧できなくなります。<br>退会する場合は、「退会する」をクリックしてください。
+      </p>
+      <div class="row mt-5">
+        <div class="col">
+          <%= link_to "退会しない", mypage_path, class: "btn btn-primary float-right" %>
+        </div>
+        <div class="col">
+          <%= link_to "退会する", quit_customers_path, method: :patch, class: "btn btn-danger float-left", data: { confirm: '本当に退会しますか？' } %>
+        </div>
       </div>
     </div>
-    <div class="col"></div>
   </div>
 </div>
