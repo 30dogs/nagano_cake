@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   passwords:     'admins/passwords',
   #admins/registrationsは必要？  registrations: 'admins/registrations'
   }
-
   ##########ここまで##########
 
   #管理者ページのルーティング

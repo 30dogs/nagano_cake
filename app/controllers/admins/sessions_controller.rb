@@ -10,7 +10,7 @@ class Admins::SessionsController < Devise::SessionsController
   def sign_out_customer
     if customer_signed_in?
       # [目的] current_customerログアウトさせる
-      # sign_out_and_redirect(resource_or_scope)
+      # sign_out_and_redirect(resource_or_scope) => Object
       # [解説] Sign out a user and tries to redirect to the url specified by after_sign_out_path_for.
       sign_out_and_redirect(current_customer)
     end
