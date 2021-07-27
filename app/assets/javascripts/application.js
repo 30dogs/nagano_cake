@@ -17,3 +17,21 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// ここからくまさん追記_jquery実装のため追記
+//= require jquery
+//= require jquery_ujs
+document.addEventListener("turbolinks:load",
+  function () {
+    $(function(){
+      $("img").hover(
+        function () {
+          this.src = this.src.replace('_off.png', '_on.gif');
+        },
+      function () {
+        this.src = this.src.replace('_on.gif', '_off.png');
+      }
+    );
+  });
+});
+// ここまでくまさん追記_jquery実装のため追記
