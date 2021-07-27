@@ -59,12 +59,30 @@ footer {
 }
 // ここまでフッター
 
-.top-info {
-  width: 100%;
+// .top-info {
+//   width: 100%;
+//   height: 500px;
+//   background-image: image-url("public_top/top-image.jpg");
+//   background-position: bottom center;
+//   background-size: cover;
+// }
+
+/* 高さを指定することにより画像が表示される */
+#top-info{
   height: 500px;
-  background-image: image-url("public_top/top-image.jpg");
-  background-position: bottom center;
-  background-size: cover;
+  width: 100%;
+}
+.image1 {
+  background-image: url("public_top/top-image.jpg");
+}
+.image2 {
+  background-image: url("public_top/19379f51d7d85-ff3f-4896-916b-977e446e89d7_m.jpg");
+}
+.image3 {
+  background-image: url("public_top/caramel-1958358_960_720.jpg");
+}
+.image4 {
+  background-image: url("public_top/d24488-1081-286538-6.jpg");
 }
 
 .top-info-image {
