@@ -1,22 +1,10 @@
-<!--くまさん宿題事項-->
-  <!--・「全xx件中xx件表示」みたいにしたい-->
-  <!--・pagenationの位置調整-->
-<!--くまさん宿題事項-->
-
 <div class="container">
   <div class="row">
     <div class="col-2">
-      <table class="genres-sidebar table">
-        <tr>
-          <th>ジャンル検索</th>
-        </tr>
-        <tr>
-          <td>余裕があれば実装</td>
-        </tr>
-      </table>
+      <%= render "public/products/genre_search", genres: @genres %>
     </div>
     <div class="col-10">
-      <h1>商品一覧 (全<%= Product.all.count %>件)</h1>
+      <h1 class="mb-4">商品一覧 (全<%= Product.all.count %>件)</h1>
       <div class="products-index-items row">
         <% @products.each do |product| %>
           <div class="products-index-item col-3">

@@ -4,7 +4,7 @@
  <div class="row">
   <div class="col-md-11">
 
-    <h2 class="mt-2">会員情報編集</h2>
+    <h3 class="mt-2">会員情報編集<i class="fas fa-edit"></i></h3>
   </div>
 
      <%= form_with model:@customer, url:customers_path, local:true, method: :patch do |f| %>
@@ -55,8 +55,8 @@
         </div>
 
       <div class="actions col-md-9 col-xs-offset-3 mt-1">
-        <%= f.submit "編集内容を保存", class: "btn btn-secondary btn-sm col-xs-6" %>
-        <%= link_to '退会する', quit_check_customers_path, class: "btn btn-info btn-sm"%>
+        <%= f.submit "編集内容を保存", class: "btn btn-success btn-sm col-xs-6" %>
+        <%= link_to '退会する', quit_check_customers_path, class: "btn btn-danger btn-sm"%>
       </div>
     <% end %>
 

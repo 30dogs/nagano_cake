@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <%= render "public/products/genre_search", genres: @genres %>
+    </div>
+    <div class="col-10">
+      <h1 class="mb-4">ジャンル (<%= @genre.name %>) 検索結果一覧</h1>
+      <% if @datas.empty? %>
+        <h4>
+          ごめんね(๑´›ωก̀๑)💦<br>
+          このジャンルの商品はまだないの
+        </h4>
+      <% end %>
+      <div class="products-index-items row">
+        <% @datas.each do |data| %>
+          <div class="products-index-item col-3">
+            <%= link_to product_path(data.id) do %>
+              <div class="products-index-item-image mb-2">
+                <%= attachment_image_tag data, :product_image, format: "jpeg", fallback: "no_image_kuma.jpg", class:"col-12 p-0" %>
+              </div>
+            <% end %>
+            <p><strong><%= data.name %></strong></p>
+            <p>¥ <%= data.tax_in_price %></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="pagenationc col-7 mx-auto">
+      </div>
+    </div>
+  </div>
+</div>

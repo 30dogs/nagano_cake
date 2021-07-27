@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search/search'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # デバイス関連のルーティング
@@ -8,7 +9,6 @@ Rails.application.routes.draw do
   passwords:     'admins/passwords',
   #admins/registrationsは必要？  registrations: 'admins/registrations'
   }
-
   ##########ここまで##########
 
   #管理者ページのルーティング
@@ -65,6 +65,9 @@ Rails.application.routes.draw do
         get 'finish'
       end
     end
+
+    # public/searchコントローラのルーティング
+    get "/customers/search", to: "search#search", as: "search"
 
   devise_for :customers, controllers: {
   sessions:      'public/customers/sessions',
