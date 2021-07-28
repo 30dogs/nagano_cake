@@ -32,8 +32,8 @@ class Public::CartItemsController < ApplicationController
   def create
     # 数量選択をしている場合としていない場合で分ける。
     # blank?は中身が空の時trueが返される。
-　　# [使い方] 変数.blank?
-　　# [解説] nil? + empty? のようなメソッド。nilまたは空のオブジェクトをチェック nil, “”, “ “(半角スペースのみ), 空の配列, 空のハッシュのときにfalseを返します Railsで拡張されたメソッドで、Rubyのみでは使えないのでご注意ください
+    # [使い方] 変数.blank?
+    # [解説] nil? + empty? のようなメソッド。nilまたは空のオブジェクトをチェック nil, “”, “ “(半角スペースのみ), 空の配列, 空のハッシュのときにfalseを返します Railsで拡張されたメソッドで、Rubyのみでは使えないのでご注意ください
     if params[:cart_item][:quantity].blank?
       # 数量を選択していない場合
       # 数量選択しなかったら、商品詳細ページにrenderで
