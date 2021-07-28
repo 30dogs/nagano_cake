@@ -9,7 +9,7 @@
         <tr class="field">
           <th><%= f.label "商品画像" %></th>
           <td>
-            <%= attachment_image_tag @product, :product_image %><br>
+            <%= attachment_image_tag @product, :product_image, class:"col-12" %><br>
             <%= f.attachment_field :product_image, class:"mt-2" %>
           </td>
         </tr>
