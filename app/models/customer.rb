@@ -47,7 +47,7 @@ class Customer < ApplicationRecord
 
   #カート内商品小計(税込み価格)を返すメソッド
   def subtotal(product_id)
-    return (self.base_price_subtotal(product_id) * 1.08).floor
+    return (self.base_price_subtotal(product_id) * 1.08)
   end
 
   # カート内商品合計金額を返すメソッド
@@ -60,5 +60,24 @@ class Customer < ApplicationRecord
     end
     #税抜きの合計金額に消費税を加える。
     return  (base_price_total * 1.08).floor
+  end
+
+  #くまさん追記 / 07/27 14:10
+  # カートアイテムでの数字の表示を直すためのもの
+  def subtotal2(product_id)
+    return (self.base_price_subtotal(product_id) * 1.08).floor.to_s(:delimited, delimiter: ',')
+  end
+
+  #くまさん追記 / 07/27 14:10
+  # カートアイテムでの数字の表示を直すためのもの
+  def total2
+    cart_items = self.cart_items
+    #カート内の税抜きの合計金額を繰り返し処理で求める。
+    base_price_total = 0
+    cart_items.each do |cart_item|
+      base_price_total += cart_item.product.base_price * cart_item.quantity
+    end
+    #税抜きの合計金額に消費税を加える。
+    return  (base_price_total * 1.08).floor.to_s(:delimited, delimiter: ',')
   end
 end

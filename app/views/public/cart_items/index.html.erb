@@ -38,7 +38,7 @@
                   </td>
                   <td>
                     <!-- 商品の税込み価格 -->
-                    <%= cart_item.product.price %>
+                    <%= cart_item.product.tax_in_price %>
                   </td>
                   <td>
                     <!--数量の変更-->
@@ -48,7 +48,7 @@
                     <% end %>
                   </td>
                   <td>
-                    <%= current_customer.subtotal(cart_item.product_id) %>円
+                    <%= current_customer.subtotal2(cart_item.product_id) %>円
                   </td>
                   <td>
                      <%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %>
@@ -71,7 +71,7 @@
                 <P>合計金額</P>
               </th>
               <th>
-                <%= current_customer.total %>円
+                <%= current_customer.total2 %>円
               </th>
             </tr>
           </table>
