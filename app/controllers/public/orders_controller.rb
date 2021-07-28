@@ -190,6 +190,10 @@ class Public::OrdersController < ApplicationController
       # 入力した値を再びpublic/orders/new.html.erbのフォームに表示させるための変数を宣言する。　ここまで
       # new.html.erbで必要な変数を宣言する。　ここまで
       # renderで遷移先を指定する。
+
+      # ここからくまさん追記 / 07/27 14:05
+      flash.now[:notice] = "お届け先を指定してください"
+      # ここまでくまさん追記 / 07/27 14:05
       render :new
     end
   end
