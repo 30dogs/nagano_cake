@@ -1,0 +1,46 @@
+<%# admin/商品編集ページ %>
+
+<%= form_with model: @product, url: admin_product_path(@product.id), method: :patch, local: true do |f| %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+    <h4 class="col-2 offset-1 bg-light text-black">商品編集</h4>
+    <table class="table table-borderless">
+        <tr class="field">
+          <th><%= f.label "商品画像" %></th>
+          <td>
+            <%= attachment_image_tag @product, :product_image, class:"col-12" %><br>
+            <%= f.attachment_field :product_image, class:"mt-2" %>
+          </td>
+        </tr>
+        <tr class="field">
+          <th><%= f.label "商品名" %></th>
+          <td><%= f.text_field :name %></td>
+        </tr>
+        <tr class="field">
+          <th><%= f.label "商品説明" %></th>
+          <td><%= f.text_area :description, :size=>"23x5" %></td>
+        </tr>
+        <tr class="field">
+          <th><%= f.label "ジャンル" %></th>
+          <td><%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: @product.genre.id  %></td>
+        </tr>
+        <tr class="field">
+          <th><%= f.label "税抜価格" %></th>
+          <td><%= f.text_field :base_price %>円</td>
+        </tr>
+        <tr class="field">
+          <th><%= f.label "販売ステータス" %></th>
+            <td>
+              <%= f.radio_button :sale_status, :true %>販売中
+              <%= f.radio_button :sale_status, :false %>販売停止中
+            </td>
+        </tr>
+        <tr>
+          <td><%= f.submit "変更を保存", class: "btn btn-info" %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<% end %>

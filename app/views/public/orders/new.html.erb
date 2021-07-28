@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <h2 class="col text-center">注文情報入力</h2>
+      </div>
+      <%= form_with url: confirm_orders_path, method: :get, local: true do |f| %>
+      <div>
+        <!--支払い方法選択　ここから-->
+        <h5>支払い方法</h5>
+        <div class="form-group row">
+          <div class="form-check col offset-1">
+            <!--「クレジットカード」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :payment_method, 1, checked: @payment_method_1, class: "form-check-input" %>
+            <!--ラジオボタンの「:payment_method, value: 1」と対応したラベルを作成する。-->
+            <%= f.label :payment_method, "クレジットカード", value: 1, class: "form-check-label" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="form-check col offset-1">
+            <!--「銀行振込」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :payment_method, 0, checked: @payment_method_0, class: "form-check-input" %>
+            <!--ラジオボタンの「:payment_method, value: 0」と対応したラベルを作成する。-->
+            <%= f.label :payment_method, "銀行振込", value: 0, class: "form-check-label" %>
+          </div>
+        </div>
+        <!--支払い方法選択　ここまで-->
+
+        <!--お届け先選択　ここから-->
+        <h5>お届け先</h5>
+        <div class="form-group row">
+          <div class="form-check col offset-1">
+            <!--「ご自身の住所」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :delivery, 1, checked: @delivery_1, class: "form-check-input" %>
+            <!--ラジオボタンの「:delivery, value: 1」と対応したラベルを作成する。-->
+            <%= f.label :delivery, "ご自身の住所", value: 1, class: "form-check-label"%>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col offset-1">
+            <p>
+              〒<%= @customer.postcode%> <%= @customer.address %>
+            </p>
+            <p class="ml-3">
+              <%= @customer.full_name %>
+            </p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="form-check col offset-1">
+            <!--「登録済住所から選択」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :delivery, 2, checked: @delivery_2, class: "form-check-input" %>
+            <!--ラジオボタンの「:delivery, value: 2」と対応したラベルを作成する。-->
+            <%= f.label :delivery, "登録先住所から選択", value: 2, class: "form-check-label" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="form-check col offset-1">
+            <!--登録済住所から選択するプルダウンを作成する。-->
+            <%= f.select :sellect_delivery, @array_deliveries, {}, {class: "form-control", style: "width: 80%"} %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="form-check col offset-1">
+            <!--「新しいお届け先」を選択するボタンを作成する。checkedはデフォルト値。-->
+            <%= f.radio_button :delivery, 3, checked: @delivery_3, class: "form-check-input" %>
+            <!--ラジオボタンの「:delivery, value: 3」と対応したラベルを作成する。-->
+            <%= f.label :delivery, "新しいお届け先", value: 3, class: "form-check-label" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="form-check col offset-1">
+            <!--ラジオボタンの「:delivery, value: 1」と対応したラベルを作成する。-->
+            <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
+            <!--郵便番号の入力フォームを作成する。valueはデフォルト値。-->
+            <%= f.text_field :postcode, value: @postcode, class: "form-control", style: "width: 40%" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="form-check col offset-1">
+            <!--新しいお届け先の住所を入力するフォームを作成する。-->
+            <%= f.label :address, "住所" %>
+            <!--住所の入力フォームを作成する。valueはデフォルト値。-->
+            <%= f.text_field :address, value: @address, class: "form-control", style: "width: 80%" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="form-check col offset-1">
+            <!--新しいお届け先の宛名を入力するフォームを作成する。-->
+            <%= f.label :name, "宛名" %>
+            <!--宛名の入力フォームを作成する。valueはデフォルト値。-->
+            <%= f.text_field :name, value: @name, class: "form-control", style: "width: 40%" %>
+          </div>
+        </div>
+        <!--お届け先選択　ここまで-->
+
+        <!--[目的] 中央寄せにする　ここから-->
+
+        <!--(パターン1)ブロック要素を中央寄せする方法を使う-->
+        <!--通常のブロック要素は幅が100％になるので、余白がない状態である。-->
+        <!--bootstrapの"row"を設定することで、cssに"display: flex"がかかる-->
+        <!--flexboxがかかっていることで、子要素はフレックスアイテムとなり、横方向に伸びなくなる。-->
+        <!--なぜなら(初期値flex-direction: row)によって、主軸が左から右になり、フレックスアイテムは主軸方向に伸縮しなくなるから。-->
+        <!--子要素が親要素より小さければ余白ができる。余白があれば"margin: 0 auto"が使える。-->
+        <!--(1)cssを使う場合-->
+        <!--<div class="row">-->
+        <!--  <div style="margin: 0 auto">-->
+        <!--    <%#= f.submit "確認画面へ進む", class: "btn btn-primary" %>-->
+        <!--  </div>-->
+        <!--</div>-->
+        <!--(2)bootstrapを使う場合-->
+        <!--<div class="row">-->
+        <!--  <div class="mx-auto">-->
+        <!--    <%#= f.submit "確認画面へ進む", class: "btn btn-primary" %>-->
+        <!--  </div>-->
+        <!--</div>-->
+
+        <!--(パターン2)インライン要素を中央寄せする方法を使う-->
+        <!--inputタグはインライン要素なので、"text-align: center"を親要素cssに書けば、子要素のインライン要素は中央寄せになる。-->
+        <!--しかし、親要素にbootstrapで"row"を設定すると、cssに"display: flex"がかかる-->
+        <!--flexboxがかかっていると、子要素はフレックスアイテムとなり、横方向に左から順に並べられる。-->
+        <!--なぜなら(初期値justify-content: flex-start)は、先頭側からアイテムが並べられるから。-->
+        <!--フレックスボックスがかかっているとtext-alignが機能しないので、親要素に"text-align: center"を設定する場合は"row"は付けない。-->
+        <!--(1)cssを使う場合-->
+        <!--<div style="text-align: center">-->
+        <!--  <%#= f.submit "確認画面へ進む", class: "btn btn-primary" %>-->
+        <!--</div>-->
+        <!--(2)bootstrapを使う場合-->
+        <!--<div class="text-center">-->
+        <!--  <%#= f.submit "確認画面へ進む", class: "btn btn-primary" %>-->
+        <!--</div>-->
+
+        <!--(パターン3)フレックスボックスを使って中央寄せする-->
+        <!--bootstrapの"row"を指定すると、cssに"display: flex"がかかる-->
+        <!--初期値で"justify-content: flex-start"がかかっているが、"justify-content: center"を設定することで中央寄せになる-->
+        <div class="row" style="justify-content: center">
+          <div>
+            <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+          </div>
+        </div>
+        <!--[目的] 中央寄せにする　ここまで-->
+
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!--くまさん追記 / レイアウト崩れのためdiv追記-->
+</div>
