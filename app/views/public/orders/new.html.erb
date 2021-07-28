@@ -43,7 +43,7 @@
           </div>
           <div>
             <!--登録済住所から選択するプルダウンを作成する。-->
-            <%= f.select :sellect_delivery, @array_deliveries %>
+            <%= f.select :sellect_delivery, @array_deliveries, {}, {class: "col-5"} %>
           </div>
           <div>
             <!--「新しいお届け先」を選択するボタンを作成する。checkedはデフォルト値。-->
