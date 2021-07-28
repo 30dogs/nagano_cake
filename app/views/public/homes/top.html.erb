@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <%= render "public/products/genre_search", genres: @genres %>
+    </div>
+    <div class="col-10">
+      <div id="top-info">
+        <div id="images">
+          <div class="image1">
+            <%= render 'explanation'%>
+          </div>
+          <div class="image2">
+            <%= render 'explanation'%>
+          </div>
+          <div class="image3">
+            <%= render 'explanation'%>
+          </div>
+          <div class="image4">
+            <%= render 'explanation'%>
+          </div>
+        </div>
+      </div>
+      <div class="new-products">
+        <h1 class="mt-5 mb-3">新着商品</h1>
+        <div class="new-products-items">
+          <div class="row">
+            <% @products.last(4).reverse_each do |product| %>
+              <div class="new-product-item col-3">
+                <div class="new-product-item-image">
+                  <%= link_to product_path(product.id) do %>
+                    <%= attachment_image_tag product, :product_image, format: "jpeg", fallback: "no_image_kuma.jpg", class:"col-12 p-0" %><br>
+                  <% end %>
+                </div>
+                <div class="new-product-item-info mt-2">
+                  <p><%= product.name %></p>
+                  <p class="mt-0">¥<%= product.tax_in_price %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <p class="text-right mt-2">
+            <%= link_to "全ての商品を見る", products_path, class:"text-right" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

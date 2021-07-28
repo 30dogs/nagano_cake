@@ -1,0 +1,120 @@
+<div class="container">
+
+  <h2>注文情報確認</h2>
+  <div class="row">
+    <!--注文情報　商品内訳-->
+    <div class="col-8 mx-auto">
+      <div>
+        <table class="table table-bordered">
+          <thead class="bg-light">
+            <th>
+              <p>商品名</p>
+            </th>
+            <th>
+              <p>単価(税込)</p>
+            </th>
+            <th>
+              <p>数量</p>
+            </th>
+            <th>
+              <p>小計</p>
+            </th>
+          </thead>
+          <tbody>
+            <% @cart_items.each do |cart_item| %>
+              <tr>
+                <td>
+                  <%= attachment_image_tag cart_item.product, :product_image, :fill, 30, 30, format: "jpeg", fallback: "noimage.jpg" %>
+                  <%= cart_item.product.name %>
+                </td>
+                <td>
+                  <p>
+                    <%= cart_item.product.tax_in_price %>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    <%= cart_item.quantity %>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    <%= (cart_item.product.base_price * cart_item.quantity * 1.08).floor.to_s(:delimited, delimiter: ',') %>
+                  </p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+      <!--注文情報　金額内訳-->
+    <div class="col-4 mx-auto">
+      <table class="table table-bordered">
+        <tr>
+          <td class="bg-light">
+            <p>送料</p>
+          </td>
+          <td>
+            <p>
+              <%= @order.postage %>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="bg-light">
+            <p>商品合計</p>
+          </td>
+          <td>
+            <p>
+              <%= @cart_item_total.to_s(:delimited, delimiter: ',') %>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="bg-light">
+            <p>請求金額</p>
+          </td>
+          <td>
+            <p>
+              <%= @order.billing_total.to_s(:delimited, delimiter: ',') %>
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-borderless col-6">
+        <tr>
+          <td>支払方法</td>
+          <td><%= @order[:payment_method] %></td>
+        </tr>
+        <tr>
+          <td>お届け先</td>
+          <td>
+            〒<%= @order.postcode %><br>
+            <%= @order.address %><br>
+            <%= @order.name %>
+          </td>
+        </tr>
+      </table>
+      <div>
+        <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+          <%= f.hidden_field :customer_id , value: current_customer.id %>
+          <%= f.hidden_field :name , value: @order.name %>
+          <%= f.hidden_field :postcode , value: @order.postcode %>
+          <%= f.hidden_field :address , value: @order.address %>
+          <%= f.hidden_field :postage , value: @order.postage %>
+          <%= f.hidden_field :billing_total , value: @order.billing_total %>
+          <%= f.hidden_field :payment_method , value: @order.payment_method %>
+          <%= f.submit "注文を確定する", class: "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

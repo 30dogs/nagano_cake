@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NaganoCake</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <title>Nagano Cake Official Store</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +11,69 @@
   </head>
 
   <body>
+    <header>
+
+      <!--ここからヘッダー-->
+      <div class="navbar mb-3 py-4">
+        <div class="navbar navbar-brand">
+          <%= link_to root_path do %>
+            <div class="header-menu">
+              <img src="/assets/header/logo_off.png" alt="about">
+            </div>
+          <% end %>
+        </div>
+        <div class="navbar">
+          <% if admin_signed_in? %>
+            <%= link_to "商品一覧", admin_products_path, class:"nav-menu-text m-2" %>
+            <%= link_to "会員一覧", admin_customers_path, class:"nav-menu-text m-2" %>
+            <%= link_to "注文履歴一覧", admin_orders_path, class:"nav-menu-text m-2" %>
+            <%= link_to "ジャンル一覧", admin_genres_path, method: :get, class:"nav-menu-text m-2" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-menu-text m-2" %>
+          <% elsif customer_signed_in? %>
+            <div class="text-white p-2 mx-2">
+              ようこそ 「<%= current_customer.last_name %> <%= current_customer.first_name %>」 様
+            </div>
+            <%= link_to "マイページ", mypage_path, class:"nav-menu-text m-2" %>
+            <%= link_to "商品一覧", products_path, class:"nav-menu-text m-2" %>
+            <%= link_to "カート", cart_items_path, class:"nav-menu-text m-2" %>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"nav-menu-text m-2" %>
+          <% else %>
+            <%= link_to "about", about_path, class:"nav-menu-text m-2" %>
+            <%= link_to "商品一覧", products_path, class:"nav-menu-text m-2" %>
+            <%= link_to "新規登録", new_customer_registration_path, class:"nav-menu-text m-2" %>
+            <%= link_to "ログイン", new_customer_session_path, class:"nav-menu-text m-2" %>
+          <% end %>
+        </div>
+      </div>
+    </header>
+    <!--ここまでヘッダー-->
+
+    <!--ここからapplication.html.erb内に "notice & alert" の呼び出しを追加-->
+    <p class="notice ml-3 text-success"><%= notice %></p>
+    <p class="alert ml-3 text-danger"><strong><%= alert %></strong></p>
+    <!--ここまでapplication.html.erb内に "notice & alert" の呼び出しを追加-->
+
     <%= yield %>
+
+    <!--ここからフッター-->
+    <footer class="bg-dark p-5 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 text-white">
+            Nagano Cake<br>
+            〒xxx-xxxx<br>
+            長野県xxx市xxx0-00-0<br>
+            Tel：<u><a href="tel:+81-90-0000-0000" class="text-white">090-0000-0000</a></u><br>
+            Mail：<u><a href="mailto:address" class="text-white">info@nagano-cake.com</a></u><br>
+            店舗営業時間：9:00 ~ 20:00<br>
+            休業日：毎週水曜日<br>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="text-white text-center">©30 dogs</div>
+      </div>
+    </footer>
+    <!--ここまでフッター-->
   </body>
 </html>

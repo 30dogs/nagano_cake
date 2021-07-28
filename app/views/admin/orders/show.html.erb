@@ -1,0 +1,93 @@
+<%# admin/注文履歴詳細ページ %>
+<div class="container">
+  <div class="row">
+    <h4 class="bg-light text-black px-4 offset-1">注文履歴詳細</h4>
+  </div>
+  <div class="row">
+    <table class="table table-borderless">
+      <tmain>
+        <tr>
+          <th class="col-2">購入者</th>
+          <td><%= link_to @order.name, admin_customer_path(@order.id) %></td>
+        </tr>
+        <tr>
+          <th class="col-2">注文日</th>
+          <td><%= @order.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
+        </tr>
+        <tr>
+          <th class="col-2">配送先</th>
+          <td>
+            <%= @order.postcode %></br>
+            <%= @order.address %></br>
+            <%= @order.name %></br>
+          </td>
+        </tr>
+        <tr>
+          <th class="col-2">支払方法</th>
+          <td><%= @order.payment_method %></td>
+        </tr>
+        <tr>
+          <th class="col-2">注文ステータス</th>
+          <td>
+          <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
+            <!--selectedで指定された値の選択肢が最初から選択された状態にする-->
+            <!--Order.statuses[@order.status]でenumの元の値を取得する-->
+            <%= f.select :status, @array_order_status, {selected: Order.statuses[@order.status]} %>
+            <%= f.submit "更新", class:"btn btn-sm btn-info" %>
+          <% end %>
+          </td>
+          <td></td>
+        </tr>
+      </tmain>
+    </table>
+  </div>
+
+  <div class="row">
+    <table class="table col-10">
+      <thead class="thead-light">
+        <tr>
+          <th>商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>製作ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.product.name %></td>
+            <td><%= order_item.purchase_price %></td>
+            <td><%= order_item.quantity %></td>
+            <td><%= order_item.sub_total_price %></td>
+            <td>
+              <%= form_with model: order_item, url: admin_order_order_item_path(order_id: @order.id, id: order_item.id), method: :patch, local: true do |f| %>
+              <!--selectedで指定された値の選択肢が最初から選択された状態にする-->
+              <!--OrderItem.making_statuses[order_item.making_status]でenumの元の値を取得する-->
+              <%= f.select :making_status, @array_order_item_making_status, {selected: OrderItem.making_statuses[order_item.making_status]} %>
+              <%= f.submit "更新", class:"btn btn-sm btn-info" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <table class="table-sm table-borderless col-2">
+      <tright>
+        <tr>
+          <td>商品合計</td>
+          <td><%= @order.order_items.to_a.sum{ |item| item.sub_total_price } %></td>
+        </tr>
+        <tr>
+          <td>送料</td>
+          <td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <td>請求金額合計</td>
+          <th><%= @order.billing_total %></th>
+        </tr>
+      </tright>
+    </table>
+  </div>
+</div>
